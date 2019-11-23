@@ -1,6 +1,4 @@
 
-package cardGame_demo1;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,23 +15,23 @@ public class Board extends JFrame {
 
 	static JPanel panelNorth;
 	static JPanel panelCenter;
-	
+
 	// 정보 관련 / 클릭 횟수, 남은 카드 수 , 정답 처리 카드 수
 	static JLabel labelMessage;
 	static int clickCount;
 	static int remains;
 	static int correct;
-	
+
 	// 후에 동적으로 변경
 	static JButton[] cards = new JButton[16];// 배열 크기는 모드에 따라 달라질 것
 	static ArrayList<Card> deck;
 	// 정답 확인을 위한 변수
 	static Card firstSelect;
 	static Card secondSelect;
-	
+
 	// 0,1,2
 	static int openCardNumber;
-	
+
 	// 게임판 생성자 (난이도 매개변수)
 	public Board(int level) {
 		super("카드 짝 맞추기 게임");
@@ -54,7 +52,7 @@ public class Board extends JFrame {
 		panelNorth = new JPanel();
 		panelNorth.setPreferredSize(new Dimension(400, 100));
 		panelNorth.setBackground(Color.DARK_GRAY);
-		
+
 		labelMessage = new JLabel("Find same Card!" + " Try " + clickCount);
 		labelMessage.setPreferredSize(new Dimension(400, 100));
 		labelMessage.setForeground(Color.WHITE);
@@ -65,17 +63,17 @@ public class Board extends JFrame {
 
 		// 게임 칸
 		panelCenter = new JPanel();
-		
+
 		panelCenter.setLayout(new GridLayout(4, 4));// 카드 개수 바뀌면 이부분 수정하면됨
 		panelCenter.setPreferredSize(new Dimension(400, 400));
-		
+
 		deck = Card.createDeck(16);
-		
+
 		for (int i = 0; i < 16; i++) {
 			cards[i] = deck.get(i);
 			panelCenter.add(cards[i]);
 		}
-		
+
 		board.add("Center", panelCenter);
 	}
 

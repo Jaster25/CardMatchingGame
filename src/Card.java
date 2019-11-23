@@ -1,4 +1,3 @@
-package cardGame_demo1;
 
 import java.awt.Dimension;
 import java.awt.Image;
