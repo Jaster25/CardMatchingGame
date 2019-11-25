@@ -1,8 +1,5 @@
-/cardGame_demo1/
-/Board.class
-/Card$1.class
-/Card$2.class
+/GameStartUI$MyActionListener.class
+/GameStartUI.class
+/CardGame.class
 /Card$3.class
-/Card.class
-/CardGamePlayer.class
-/GamePlay.class
+/Board.class
