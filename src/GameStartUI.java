@@ -38,6 +38,9 @@ public class GameStartUI extends JPanel {
 	// 0,1,2
 	static int openCardNumber;
 
+	// 카드의 짝이 맞으면 카운트하는 변수
+	static int correctedCardCnt;
+	
 	public GameStartUI(CardGame window) {
 		level = CardGame.stepLevel;
 		this.window = window;

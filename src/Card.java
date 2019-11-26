@@ -1,5 +1,8 @@
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +18,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import javax.swing.*;
 public class Card extends JButton {
 
 	static private int CARD_SIZE;
@@ -27,7 +30,18 @@ public class Card extends JButton {
 
 	String front, back;
 
-	public Card(int i) {
+	// 게임 종료 안내문 프레임
+	static JFrame exitFrame;
+	// 게임 종료 안내문 패널
+	static JPanel panelNorth;
+	static JPanel panelCenter;
+	// 게임 종료 안내문 메시지
+	static JLabel exitMessage;
+	// 게임 종료 선택 버튼
+	static JButton yes;
+	static JButton no;
+	
+	public Card(int i, int size) {
 		super();
 		open = false;
 		correct = false;
@@ -56,8 +70,8 @@ public class Card extends JButton {
 				if (!correct) {
 					// 시도 횟수 증가
 					GameStartUI.clickCount++;
-					GameStartUI.labelMessage.setText("Find same Card!" + " Try " + GameStartUI.clickCount);
-					cardClick();
+					GameStartUI.labelMessage.setText("Find same Card!" + " Try " + GameStartUI.clickCount/2);
+					cardClick(size);
 				}
 			}
 		});
@@ -86,7 +100,7 @@ public class Card extends JButton {
 		this.setIcon(changeImage(back));
 	}
 
-	public void cardClick() {
+	public void cardClick(int size) {
 
 		// 앞면인 경우
 		if (open) {
@@ -104,7 +118,7 @@ public class Card extends JButton {
 		} else if (GameStartUI.openCardNumber == 2) {
 			GameStartUI.secondSelect = this;
 
-			checking();
+			checking(size);
 		}
 	}
 
@@ -112,7 +126,7 @@ public class Card extends JButton {
 		return GameStartUI.firstSelect.front.equals(GameStartUI.secondSelect.front);
 	}
 
-	public void checking() {
+	public void checking(int size) {
 
 		GameStartUI.openCardNumber = 0;
 
@@ -124,6 +138,54 @@ public class Card extends JButton {
 			soundPlay("correct");
 			first.correct = true;
 			second.correct = true;
+			//정답이면 정답 카드 개수를 카운트하고 전체 카드개수와 비교해 게임의 종료 유무판단
+			GameStartUI.correctedCardCnt++;
+			if(GameStartUI.correctedCardCnt == size)
+			{
+				// 종료 안내 프레임 띄우기
+				exitFrame = new JFrame();
+				exitFrame.setTitle("게임 종료");
+				exitFrame.setLocation(500,500);
+				exitFrame.setSize(400,400);
+				exitFrame.setVisible(true);
+				exitFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
+				// 게임 종료 안내문
+				panelNorth = new JPanel();
+				panelNorth.setLayout(new GridLayout(1,1));
+				panelNorth.setPreferredSize(new Dimension(400, 100));
+				panelNorth.setBackground(Color.GRAY);
+
+				exitMessage = new JLabel("난이도를 다시 선택하시겠습니까?");
+				exitMessage.setPreferredSize(new Dimension(400, 100));
+				exitMessage.setForeground(Color.WHITE);
+				exitMessage.setFont(new Font("Monaco", Font.BOLD, 20));
+				exitMessage.setHorizontalAlignment(JLabel.CENTER);
+				panelNorth.add(exitMessage); 
+				exitFrame.add("North", panelNorth);
+				
+				//선택 버튼
+				panelCenter = new JPanel();				
+				panelCenter.setPreferredSize(new Dimension(400,100));
+				panelCenter.setLayout(new GridLayout(1,2));
+				
+				yes = new JButton("예");
+				yes.setPreferredSize(new Dimension(150,100));
+				yes.setFont(new Font("Monaco", Font.BOLD, 25));
+				yes.setForeground(Color.WHITE);
+				yes.setBackground(Color.DARK_GRAY);
+				
+				no = new JButton("아니오");
+				no.setPreferredSize(new Dimension(150,100));
+				no.setFont(new Font("Monaco", Font.BOLD, 25));
+				no.setForeground(Color.WHITE);
+				no.setBackground(Color.DARK_GRAY);
+				
+				panelCenter.add(yes,"CENTER");
+				panelCenter.add(no,"CENTER");
+				
+				exitFrame.add("Center",panelCenter);
+			}
 		}
 
 		else {
@@ -163,8 +225,8 @@ public class Card extends JButton {
 
 		// 쌍으로
 		for (int i = 1; i <= 4; ++i) {
-			Card newCard1 = new Card(i);
-			Card newCard2 = new Card(i);
+			Card newCard1 = new Card(i,4);
+			Card newCard2 = new Card(i,4);
 
 			deck.add(newCard1);
 			deck.add(newCard2);
@@ -187,8 +249,8 @@ public class Card extends JButton {
 
 		// 쌍으로
 		for (int i = 1; i <= 8; ++i) {
-			Card newCard1 = new Card(i);
-			Card newCard2 = new Card(i);
+			Card newCard1 = new Card(i,8);
+			Card newCard2 = new Card(i,8);
 
 			deck.add(newCard1);
 			deck.add(newCard2);
@@ -207,8 +269,8 @@ public class Card extends JButton {
 
 		// 쌍으로
 		for (int i = 1; i <= 12; ++i) {
-			Card newCard1 = new Card(i);
-			Card newCard2 = new Card(i);
+			Card newCard1 = new Card(i,12);
+			Card newCard2 = new Card(i,12);
 
 			deck.add(newCard1);
 			deck.add(newCard2);
