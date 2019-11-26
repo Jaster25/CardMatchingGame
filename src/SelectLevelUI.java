@@ -20,9 +20,9 @@ public class SelectLevelUI extends JPanel {
 
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
 
-	//게임 종료 버튼
+	// 게임 종료 버튼
 	static JButton exitButton;
-	
+
 	// 초기화면 생성자
 	public SelectLevelUI(CardGame window) {
 
@@ -59,29 +59,27 @@ public class SelectLevelUI extends JPanel {
 		panelCenter.add(buttons.get(2), "CENTER");
 
 		this.add("CENTER", panelCenter);
-		
-		for(int i=0 ; i<3 ; ++i)
-		buttons.get(i).addActionListener(new MyActionListener(i));
 
-		
-		 //exit버튼 
-	      panelSouth = new JPanel();
+		for (int i = 0; i < 3; ++i)
+			buttons.get(i).addActionListener(new MyActionListener(i));
 
-	      panelSouth.setPreferredSize(new Dimension(500,80));
-	      exitButton = new JButton("게임 종료");
-	      exitButton.setPreferredSize(new Dimension(150,70));
-	      exitButton.setFont(new Font("Monaco", Font.BOLD, 25));
-	      exitButton.setForeground(Color.WHITE);
-	      exitButton.setBackground(Color.BLACK);
-	      
-	      panelSouth.add(exitButton,"SOUTH");
-	      this.add("SOUTH",panelSouth);
-	      exitButton.addActionListener(new ActionListener() {
-	         public void actionPerformed(ActionEvent e)
-	         {
-	            System.exit(0);
-	         }
-	      });
+		// exit버튼
+		panelSouth = new JPanel();
+
+		panelSouth.setPreferredSize(new Dimension(500, 80));
+		exitButton = new JButton("게임 종료");
+		exitButton.setPreferredSize(new Dimension(150, 70));
+		exitButton.setFont(new Font("Monaco", Font.BOLD, 25));
+		exitButton.setForeground(Color.WHITE);
+		exitButton.setBackground(Color.BLACK);
+
+		panelSouth.add(exitButton, "SOUTH");
+		this.add("SOUTH", panelSouth);
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 
 	}
 
@@ -94,15 +92,13 @@ public class SelectLevelUI extends JPanel {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{
+		public void actionPerformed(ActionEvent e) {
 			CardGame.stepLevel = this.level;
-			
+
 			window.panel_2 = new GameStartUI(window);
 			window.resize(900, 900);
 			window.setLocationRelativeTo(null);
-			window.change("panel_2"); 
+			window.change("panel_2");
 		}
 	}
 }
-
