@@ -59,32 +59,25 @@ public class GameStartUI extends JPanel {
 		// 게임 칸
 		panelCenter = new JPanel();
 
-		// easy 난이도
+		// 난이도 별로 나누기
 		if (level == 0) {
 			deck = Card.createEasyDeck();
 			panelCenter.setLayout(new GridLayout(3, 3));// 카드 개수 바뀌면 이부분 수정하면됨
-			panelCenter.setPreferredSize(new Dimension(600, 600));
 
-			for (Card card : deck) {
-				panelCenter.add(card);
-			}
 		} else if (level == 1) {
 			deck = Card.createNormalDeck();
 			panelCenter.setLayout(new GridLayout(4, 4));// 카드 개수 바뀌면 이부분 수정하면됨
-			panelCenter.setPreferredSize(new Dimension(600, 600));
 
-			for (Card card : deck) {
-				panelCenter.add(card);
-			}
 		} else if (level == 2) {
 			deck = Card.createHardDeck();
 			panelCenter.setLayout(new GridLayout(5, 5));// 카드 개수 바뀌면 이부분 수정하면됨
-			panelCenter.setPreferredSize(new Dimension(600, 600));
-
-			for (Card card : deck) {
-				panelCenter.add(card);
-			}
 		}
+
+		panelCenter.setPreferredSize(new Dimension(600, 600));
+		for (Card card : deck) {
+			panelCenter.add(card);
+		}
+
 		this.add("Center", panelCenter);
 
 		// 포기 버튼
@@ -99,8 +92,7 @@ public class GameStartUI extends JPanel {
 		this.add("SOUTH", panelSouth);
 
 		Giveup.addActionListener(new MyActionListener());
-		
-		
+
 		// 카드 잠깐 보여주기
 		Card.startEffect(deck);
 	}
@@ -112,5 +104,15 @@ public class GameStartUI extends JPanel {
 			window.resize(500, 400);
 			window.setLocationRelativeTo(null);
 		}
+	}
+	
+	// 끝났는지 확인
+	public boolean isClear() {
+		return remains == 0;
+	}
+	
+	// 끝났을 시 실행할 메소드
+	public void endGame() {
+		
 	}
 }
