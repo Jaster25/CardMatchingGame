@@ -27,7 +27,7 @@ public class GameStartUI extends JPanel {
 	static int remains;
 	static int correct;
 
-	static ArrayList<Card> cards;
+	static ArrayList<Card> deck;
 
 	// 포기 버튼
 	static JButton Giveup;
@@ -61,27 +61,27 @@ public class GameStartUI extends JPanel {
 
 		// easy 난이도
 		if (level == 0) {
-			cards = Card.createEasyDeck();
+			deck = Card.createEasyDeck();
 			panelCenter.setLayout(new GridLayout(3, 3));// 카드 개수 바뀌면 이부분 수정하면됨
 			panelCenter.setPreferredSize(new Dimension(1000, 700));
 
-			for (Card card : cards) {
+			for (Card card : deck) {
 				panelCenter.add(card);
 			}
 		} else if (level == 1) {
-			cards = Card.createNormalDeck();
+			deck = Card.createNormalDeck();
 			panelCenter.setLayout(new GridLayout(4, 4));// 카드 개수 바뀌면 이부분 수정하면됨
 			panelCenter.setPreferredSize(new Dimension(1000, 700));
 
-			for (Card card : cards) {
+			for (Card card : deck) {
 				panelCenter.add(card);
 			}
 		} else if (level == 2) {
-			cards = Card.createHardDeck();
+			deck = Card.createHardDeck();
 			panelCenter.setLayout(new GridLayout(5, 5));// 카드 개수 바뀌면 이부분 수정하면됨
 			panelCenter.setPreferredSize(new Dimension(1000, 700));
 
-			for (Card card : cards) {
+			for (Card card : deck) {
 				panelCenter.add(card);
 			}
 		}
@@ -99,6 +99,10 @@ public class GameStartUI extends JPanel {
 		this.add("SOUTH", panelSouth);
 
 		Giveup.addActionListener(new MyActionListener());
+		
+		
+		// 카드 잠깐 보여주기
+		Card.startEffect(deck);
 	}
 
 	class MyActionListener implements ActionListener {

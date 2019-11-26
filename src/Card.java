@@ -39,14 +39,14 @@ public class Card extends JButton {
 
 		// 카드 난이도에 맞게 사이즈 설정
 		if (CardGame.stepLevel == 0) {
-			CARD_HEIGHT = 555;
-			CARD_WIDTH = 555;
+			CARD_HEIGHT = 250;
+			CARD_WIDTH = 250;
 		} else if (CardGame.stepLevel == 1) {
-			CARD_HEIGHT = 444;
-			CARD_WIDTH = 444;
+			CARD_HEIGHT = 150;
+			CARD_WIDTH = 150;
 		} else {
-			CARD_HEIGHT = 333;
-			CARD_WIDTH = 333;
+			CARD_HEIGHT = 100;
+			CARD_WIDTH = 100;
 		}
 
 		this.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
@@ -73,21 +73,20 @@ public class Card extends JButton {
 		open = false;
 		correct = false;
 
-		setEnabled(false);
 		isWall = false;
 		front = "wall.png";
 		back = "wall.png";
 
 		// 카드 난이도에 맞게 사이즈 설정
 		if (CardGame.stepLevel == 0) {
-			CARD_HEIGHT = 3333;
-			CARD_WIDTH = 3333;
+			CARD_HEIGHT = 250;
+			CARD_WIDTH = 250;
 		} else if (CardGame.stepLevel == 1) {
-			CARD_HEIGHT = 4444;
-			CARD_WIDTH = 4444;
+			CARD_HEIGHT = 150;
+			CARD_WIDTH = 150;
 		} else {
-			CARD_HEIGHT = 5555;
-			CARD_WIDTH = 5555;
+			CARD_HEIGHT = 100;
+			CARD_WIDTH = 100;
 		}
 
 		this.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
@@ -168,9 +167,8 @@ public class Card extends JButton {
 		}
 	}
 
-	
 	// 0.jpg 는 뒷면이니 for문 1부터
-	
+
 	// 카드 덱 생성 함수
 	static ArrayList<Card> createEasyDeck() {
 
@@ -240,37 +238,41 @@ public class Card extends JButton {
 		return deck;
 	}
 
-//	 게임 시작시 카드 잠깐 보여주기
-	public void startEffect() {
+// 뒤집혀 지는 순서?
+// 게임 시작시 카드 잠깐 보여주기
+	public static void startEffect(ArrayList<Card> deck) {
 
-		int level = CardGame.stepLevel;
-
-		// 33 - 1
-		if (level == 1) {
-			
+		for (Card card : deck) {
+			card.flip();
 		}
-		// 44
-		else if (level == 2) {
 
-		}
-		// 55 -1
-		else {
+		// 시간 딜레이
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
 
-		}
+				for (Card card : deck)
+					card.flip();
+			}
+		}, 500);
+
 	}
 
 	// 카드 뒤집기 - 위에 카드 잠깐 보여주기에서 쓸 함수
 	public void flip() {
 		// 벽이 아닐 경우
-		if (!isWall)
+		if (!isWall) {
 			soundPlay("flip");
 
-		if (open) {
-			setIcon(changeImage(back));
-			open = false;
-		} else {
-			setIcon(changeImage(front));
-			open = true;
+			if (open) {
+				setIcon(changeImage(back));
+				open = false;
+			} else {
+				setIcon(changeImage(front));
+				open = true;
+			}
+
 		}
 	}
 
