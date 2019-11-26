@@ -34,7 +34,7 @@ public class Card extends JButton {
 		correct = false;
 		isWall = false;
 
-		front = i + ".jpg";
+		front = i + ".png";
 		back = "0.png";
 
 		// 카드 난이도에 맞게 사이즈 설정
@@ -75,8 +75,8 @@ public class Card extends JButton {
 
 		setEnabled(false);
 		isWall = false;
-		front = "wall.jpg";
-		back = "wall.jpg";
+		front = "wall.png";
+		back = "wall.png";
 
 		// 카드 난이도에 맞게 사이즈 설정
 		if (CardGame.stepLevel == 0) {
