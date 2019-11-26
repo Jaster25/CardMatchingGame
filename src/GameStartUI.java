@@ -109,6 +109,8 @@ public class GameStartUI extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			window.change("panel_1");
+			window.resize(500, 400);
+			window.setLocationRelativeTo(null);
 		}
 	}
 }

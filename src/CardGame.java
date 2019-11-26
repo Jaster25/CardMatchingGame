@@ -34,7 +34,7 @@ public class CardGame extends JFrame {
 		
 		window.add(window.panel_1);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(800, 800);
+		window.setSize(500, 400);
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		/*

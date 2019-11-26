@@ -15,10 +15,14 @@ public class SelectLevelUI extends JPanel {
 
 	static JPanel panelNorth;
 	static JPanel panelCenter;
+	static JPanel panelSouth;
 	static JLabel labelMessage;
 
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
 
+	//게임 종료 버튼
+	static JButton exitButton;
+	
 	// 초기화면 생성자
 	public SelectLevelUI(CardGame window) {
 
@@ -40,7 +44,7 @@ public class SelectLevelUI extends JPanel {
 		// 게임 칸
 		panelCenter = new JPanel();
 
-		panelCenter.setPreferredSize(new Dimension(800, 700));
+		panelCenter.setPreferredSize(new Dimension(500, 150));
 		buttons.add(new JButton("EASY"));
 		buttons.add(new JButton("NORMAL"));
 		buttons.add(new JButton("HARD"));
@@ -59,6 +63,26 @@ public class SelectLevelUI extends JPanel {
 		for(int i=0 ; i<3 ; ++i)
 		buttons.get(i).addActionListener(new MyActionListener(i));
 
+		
+		 //exit버튼 
+	      panelSouth = new JPanel();
+
+	      panelSouth.setPreferredSize(new Dimension(500,80));
+	      exitButton = new JButton("게임 종료");
+	      exitButton.setPreferredSize(new Dimension(150,70));
+	      exitButton.setFont(new Font("Monaco", Font.BOLD, 25));
+	      exitButton.setForeground(Color.WHITE);
+	      exitButton.setBackground(Color.BLACK);
+	      
+	      panelSouth.add(exitButton,"SOUTH");
+	      this.add("SOUTH",panelSouth);
+	      exitButton.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e)
+	         {
+	            System.exit(0);
+	         }
+	      });
+
 	}
 
 	class MyActionListener implements ActionListener {
@@ -75,6 +99,8 @@ public class SelectLevelUI extends JPanel {
 			CardGame.stepLevel = this.level;
 			
 			window.panel_2 = new GameStartUI(window);
+			window.resize(900, 900);
+			window.setLocationRelativeTo(null);
 			window.change("panel_2"); 
 		}
 	}
