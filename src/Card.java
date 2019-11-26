@@ -18,13 +18,12 @@ import javax.swing.JButton;
 
 public class Card extends JButton {
 
+	static private int CARD_SIZE;
+
 	// 앞면 true, 뒷면 false
 	boolean open;
 	boolean correct;
 	boolean isWall;
-
-	static private int CARD_WIDTH;
-	static private int CARD_HEIGHT;
 
 	String front, back;
 
@@ -39,17 +38,14 @@ public class Card extends JButton {
 
 		// 카드 난이도에 맞게 사이즈 설정
 		if (CardGame.stepLevel == 0) {
-			CARD_HEIGHT = 250;
-			CARD_WIDTH = 250;
+			CARD_SIZE = 200;
 		} else if (CardGame.stepLevel == 1) {
-			CARD_HEIGHT = 150;
-			CARD_WIDTH = 150;
+			CARD_SIZE = 150;
 		} else {
-			CARD_HEIGHT = 100;
-			CARD_WIDTH = 100;
+			CARD_SIZE = 120;
 		}
 
-		this.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+		this.setPreferredSize(new Dimension(CARD_SIZE, CARD_SIZE));
 		this.setIcon(changeImage(back));
 
 		this.addActionListener(new ActionListener() {
@@ -79,34 +75,27 @@ public class Card extends JButton {
 
 		// 카드 난이도에 맞게 사이즈 설정
 		if (CardGame.stepLevel == 0) {
-			CARD_HEIGHT = 250;
-			CARD_WIDTH = 250;
+			CARD_SIZE = 200;
 		} else if (CardGame.stepLevel == 1) {
-			CARD_HEIGHT = 150;
-			CARD_WIDTH = 150;
+			CARD_SIZE = 150;
 		} else {
-			CARD_HEIGHT = 100;
-			CARD_WIDTH = 100;
+			CARD_SIZE = 120;
 		}
 
-		this.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+		this.setPreferredSize(new Dimension(CARD_SIZE, CARD_SIZE));
 		this.setIcon(changeImage(back));
 	}
 
 	public void cardClick() {
 
-		soundPlay("flip");
-
 		// 앞면인 경우
 		if (open) {
-			setIcon(changeImage(back));
-			open = false;
+			flip();
 			GameStartUI.openCardNumber--;
 		}
 		// 뒷면인 경우
 		else {
-			setIcon(changeImage(front));
-			open = true;
+			flip();
 			GameStartUI.openCardNumber++;
 		}
 
@@ -117,8 +106,6 @@ public class Card extends JButton {
 
 			checking();
 		}
-
-		System.out.println(this.front);
 	}
 
 	public boolean isCorrect() {
@@ -291,11 +278,12 @@ public class Card extends JButton {
 	}
 
 	// 이미지 바꾸는 메소드
-	static ImageIcon changeImage(String filename) {
+	ImageIcon changeImage(String filename) {
 		ImageIcon icon = new ImageIcon("./images/" + filename);
 		Image originImage = icon.getImage();
 		// 이미지 사이즈 바꿔서 저장할 메소드
-		Image changedImage = originImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		Image changedImage = originImage.getScaledInstance(CARD_SIZE, CARD_SIZE, Image.SCALE_SMOOTH);
+
 		ImageIcon icon_new = new ImageIcon(changedImage);
 		return icon_new;
 	}

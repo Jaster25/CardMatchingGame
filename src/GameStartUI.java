@@ -63,7 +63,7 @@ public class GameStartUI extends JPanel {
 		if (level == 0) {
 			deck = Card.createEasyDeck();
 			panelCenter.setLayout(new GridLayout(3, 3));// 카드 개수 바뀌면 이부분 수정하면됨
-			panelCenter.setPreferredSize(new Dimension(1000, 700));
+			panelCenter.setPreferredSize(new Dimension(600, 600));
 
 			for (Card card : deck) {
 				panelCenter.add(card);
@@ -71,7 +71,7 @@ public class GameStartUI extends JPanel {
 		} else if (level == 1) {
 			deck = Card.createNormalDeck();
 			panelCenter.setLayout(new GridLayout(4, 4));// 카드 개수 바뀌면 이부분 수정하면됨
-			panelCenter.setPreferredSize(new Dimension(1000, 700));
+			panelCenter.setPreferredSize(new Dimension(600, 600));
 
 			for (Card card : deck) {
 				panelCenter.add(card);
@@ -79,7 +79,7 @@ public class GameStartUI extends JPanel {
 		} else if (level == 2) {
 			deck = Card.createHardDeck();
 			panelCenter.setLayout(new GridLayout(5, 5));// 카드 개수 바뀌면 이부분 수정하면됨
-			panelCenter.setPreferredSize(new Dimension(1000, 700));
+			panelCenter.setPreferredSize(new Dimension(600, 600));
 
 			for (Card card : deck) {
 				panelCenter.add(card);

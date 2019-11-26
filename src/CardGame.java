@@ -34,7 +34,8 @@ public class CardGame extends JFrame {
 		
 		window.add(window.panel_1);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(1000, 1000);
+		window.setSize(800, 800);
+		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		/*
 		 * int stepLevel; //난이도 클래스 호출(매개변수 받기) Scanner input = new Scanner(System.in);
