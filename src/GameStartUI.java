@@ -87,22 +87,20 @@ public class GameStartUI extends JPanel {
 		Giveup = new JButton("게임 포기");
 		Giveup.setForeground(Color.WHITE);
 		Giveup.setBackground(Color.BLACK);
-		Giveup.addActionListener(new MyActionListener());
+		Giveup.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				window.change("panel_1");
+				window.resize(500, 400);
+				window.setLocationRelativeTo(null);
+			}
+		});
 
 		panelSouth.add(Giveup, "SOUTH");
 		this.add("SOUTH", panelSouth);
 
 		// 카드 잠깐 보여주기
 		Card.startEffect(deck);
-	}
-
-	class MyActionListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			window.change("panel_1");
-			window.resize(500, 400);
-			window.setLocationRelativeTo(null);
-		}
 	}
 
 	public static boolean isCorrect() {
