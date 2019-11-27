@@ -96,7 +96,7 @@ public class SelectLevelUI extends JPanel {
 			CardGame.stepLevel = this.level;
 
 			window.panel_2 = new GameStartUI(window);
-			window.resize(900, 900);
+			window.resize(800, 900);
 			window.setLocationRelativeTo(null);
 			window.change("panel_2");
 		}

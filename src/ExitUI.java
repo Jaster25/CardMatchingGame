@@ -61,6 +61,7 @@ public class ExitUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				exitFrame.removeAll();
 				exitFrame.dispose();
+				GameStartUI.tryCount = 0;
 				CardGame.replay();
 			}
 		});
@@ -73,6 +74,7 @@ public class ExitUI extends JFrame {
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				System.exit(0);
 			}
 		});

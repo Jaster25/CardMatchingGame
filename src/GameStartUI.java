@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +22,10 @@ public class GameStartUI extends JPanel {
 	static JPanel panelCenter;
 	static JPanel panelSouth;
 
+	//Base Pannel
+//	static JPanel basePanel;
+//	ImageIcon bgi = new ImageIcon("C:\\BGI.JPG");
+//	
 	// 게임 난이도 변수
 	private int level;
 
@@ -31,35 +37,60 @@ public class GameStartUI extends JPanel {
 	static ArrayList<Card> deck;
 
 	// 포기 버튼
-	static JButton Giveup;
+	 static JButton Giveup;
+
+	// 하단 레이블 메시지 (remains, try)
+	static JLabel remainMessage;
+	static JLabel tryMessage;
+
 	// 정답 확인을 위한 변수
 	static Card firstSelect;
 	static Card secondSelect;
 
 	// 0,1,2
 	static int openCardNumber;
+	
 
 	public GameStartUI(CardGame window) {
 		level = CardGame.stepLevel;
 		this.window = window;
-
+		
+		// basePanel에 배경이미지 삽입
+		//basePanel = new JPanel();
+		
 		// 게임 안내문
 		panelNorth = new JPanel();
-		panelNorth.setLayout(new GridLayout(1, 1));
-		panelNorth.setPreferredSize(new Dimension(1000, 100));
+		panelNorth.setLayout(new GridLayout(1, 2));
+		panelNorth.setPreferredSize(new Dimension(600, 120));
 		panelNorth.setBackground(Color.DARK_GRAY);
 
-		labelMessage = new JLabel("Find same Card!" + " Try " + tryCount);
-		labelMessage.setPreferredSize(new Dimension(1000, 100));
+		labelMessage = new JLabel("여기다 시간 넣을거임 ");
+		labelMessage.setPreferredSize(new Dimension(600, 120));
 		labelMessage.setForeground(Color.WHITE);
 		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
+
+		// 포기버튼
+		Giveup = new JButton("게임 포기");
+		Giveup.setForeground(Color.WHITE);
+		Giveup.setBackground(Color.BLACK);
+		Giveup.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				window.change("panel_1");
+				GameStartUI.tryCount = 0;
+
+				window.resize(500, 400);
+				window.setLocationRelativeTo(null);
+			}
+		});
 		panelNorth.add(labelMessage); // 패널 상단에 위치시키기
+		panelNorth.add(Giveup);
 		this.add("North", panelNorth);
 
 		// 게임 칸
 		panelCenter = new JPanel();
-
+		
 		// 난이도 별로 나누기
 		if (level == 0) {
 			deck = Card.createEasyDeck();
@@ -81,22 +112,26 @@ public class GameStartUI extends JPanel {
 
 		this.add("Center", panelCenter);
 
-		// 포기 버튼
+		// 하단 레이블 메시지(remains, try)
 		panelSouth = new JPanel();
-		panelSouth.setPreferredSize(new Dimension(1000, 100));
-		Giveup = new JButton("게임 포기");
-		Giveup.setForeground(Color.WHITE);
-		Giveup.setBackground(Color.BLACK);
-		Giveup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				window.change("panel_1");
-				window.resize(500, 400);
-				window.setLocationRelativeTo(null);
-			}
-		});
+		panelSouth.setPreferredSize(new Dimension(600, 120));
+		panelSouth.setLayout(new GridLayout(1, 2));
+		panelSouth.setBackground(Color.DARK_GRAY);
 
-		panelSouth.add(Giveup, "SOUTH");
+		remainMessage = new JLabel("Remains Card : " + remains);
+		remainMessage.setPreferredSize(new Dimension(300, 120));
+		remainMessage.setForeground(Color.WHITE);
+		remainMessage.setFont(new Font("Monaco", Font.BOLD, 20));
+		remainMessage.setHorizontalAlignment(JLabel.CENTER);
+
+		tryMessage = new JLabel("try : " + tryCount);
+		tryMessage.setPreferredSize(new Dimension(300, 120));
+		tryMessage.setForeground(Color.WHITE);
+		tryMessage.setFont(new Font("Monaco", Font.BOLD, 20));
+		tryMessage.setHorizontalAlignment(JLabel.CENTER);
+
+		panelSouth.add(remainMessage);
+		panelSouth.add(tryMessage);
 		this.add("SOUTH", panelSouth);
 
 		// 카드 잠깐 보여주기
@@ -110,7 +145,6 @@ public class GameStartUI extends JPanel {
 	public static void checking() {
 
 		tryCount++;
-		labelMessageUpdate();
 		openCardNumber = 0;
 
 		Card first = firstSelect;
@@ -152,10 +186,16 @@ public class GameStartUI extends JPanel {
 				}
 			}, 700);
 		}
+		labelMessageUpdate();
+
 	}
 
 	// 상단 + 하단? JLabel 업데이트
 	public static void labelMessageUpdate() {
-		labelMessage.setText("Find same Card!" + " Try " + tryCount);
+		labelMessage.setText("여기다 시간 넣을거임");
+		labelMessage.setHorizontalAlignment(JLabel.CENTER);
+
+		remainMessage.setText("Remains Card : " + remains);
+		tryMessage.setText("try : " + tryCount);
 	}
 }
