@@ -8,29 +8,38 @@ import javax.swing.ImageIcon;
 
 // 유틸리티 메소드용 클래스
 public class Utility {
-	
+
 	// 매개변수에 맞는 효과음 실행
-		static void soundPlay(String sound) {
+	static void soundPlay(String sound) {
 
-			File file = new File("./sounds/" + sound + ".wav");
-			try {
-				AudioInputStream stream = AudioSystem.getAudioInputStream(file);
-				Clip clip = AudioSystem.getClip();
-				clip.open(stream);
-				clip.start();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		File file = new File("./sounds/" + sound + ".wav");
+		try {
+			AudioInputStream stream = AudioSystem.getAudioInputStream(file);
+			Clip clip = AudioSystem.getClip();
+			clip.open(stream);
+			clip.start();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
 
-		// 이미지 바꾸는 메소드
-		static ImageIcon changeImage(String filename) {
-			ImageIcon icon = new ImageIcon("./images/" + filename);
-			Image originImage = icon.getImage();
-			// 이미지 사이즈 바꿔서 저장할 메소드
-			Image changedImage = originImage.getScaledInstance(Card.CARD_SIZE, Card.CARD_SIZE, Image.SCALE_SMOOTH);
+	// 카드의 이미지 바꾸는 메소드
+	static ImageIcon changeCardImage(String filename) {
+		ImageIcon icon = new ImageIcon("./images/" + filename);
+		Image originImage = icon.getImage();
+		Image changedImage = originImage.getScaledInstance(Card.CARD_SIZE, Card.CARD_SIZE, Image.SCALE_SMOOTH);
 
-			ImageIcon icon_new = new ImageIcon(changedImage);
-			return icon_new;
-		}
+		ImageIcon icon_new = new ImageIcon(changedImage);
+		return icon_new;
+	}
+
+	// 버튼의 이미지 바꾸는 메소드
+	static ImageIcon changeButtonImage(String filename) {
+		ImageIcon icon = new ImageIcon("./images/" + filename);
+		Image originImage = icon.getImage();
+		Image changedImage = originImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+		ImageIcon icon_new = new ImageIcon(changedImage);
+		return icon_new;
+	}
 }

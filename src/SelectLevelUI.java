@@ -67,11 +67,11 @@ public class SelectLevelUI extends JPanel {
 		panelSouth = new JPanel();
 
 		panelSouth.setPreferredSize(new Dimension(500, 80));
-		exitButton = new JButton("게임 종료");
+		exitButton = new JButton(Utility.changeButtonImage("exit.png"));
 		exitButton.setPreferredSize(new Dimension(150, 70));
-		exitButton.setFont(new Font("Monaco", Font.BOLD, 25));
-		exitButton.setForeground(Color.WHITE);
-		exitButton.setBackground(Color.BLACK);
+//		exitButton.setFont(new Font("Monaco", Font.BOLD, 25));
+//		exitButton.setForeground(Color.WHITE);
+//		exitButton.setBackground(Color.BLACK);
 
 		panelSouth.add(exitButton, "SOUTH");
 		this.add("SOUTH", panelSouth);

@@ -51,11 +51,11 @@ public class ExitUI extends JFrame {
 		panelCenter.setPreferredSize(new Dimension(400, 100));
 		panelCenter.setLayout(new GridLayout(1, 2));
 
-		yesButton = new JButton("예");
+		yesButton = new JButton(Utility.changeButtonImage("yes.png"));
 		yesButton.setPreferredSize(new Dimension(150, 50));
-		yesButton.setFont(new Font("Monaco", Font.BOLD, 25));
-		yesButton.setForeground(Color.WHITE);
-		yesButton.setBackground(Color.DARK_GRAY);
+//		yesButton.setFont(new Font("Monaco", Font.BOLD, 25));
+//		yesButton.setForeground(Color.WHITE);
+//		yesButton.setBackground(Color.DARK_GRAY);
 		yesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -66,11 +66,11 @@ public class ExitUI extends JFrame {
 			}
 		});
 
-		noButton = new JButton("아니오");
+		noButton = new JButton(Utility.changeButtonImage("cancel.png"));
 		noButton.setPreferredSize(new Dimension(150, 50));
-		noButton.setFont(new Font("Monaco", Font.BOLD, 25));
-		noButton.setForeground(Color.WHITE);
-		noButton.setBackground(Color.DARK_GRAY);
+//		noButton.setFont(new Font("Monaco", Font.BOLD, 25));
+//		noButton.setForeground(Color.WHITE);
+//		noButton.setBackground(Color.DARK_GRAY);
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -28,7 +28,6 @@ public class CardGame extends JFrame {
 		window = new CardGame();
 
 		window.setTitle("카드 짝 맞추기 게임");
-
 		window.panel_1 = new SelectLevelUI(window);
 		window.add(window.panel_1);
 
@@ -46,7 +45,6 @@ public class CardGame extends JFrame {
 		window = new CardGame();
 
 		window.setTitle("카드 짝 맞추기 게임");
-
 		window.panel_1 = new SelectLevelUI(window);
 		window.add(window.panel_1);
 

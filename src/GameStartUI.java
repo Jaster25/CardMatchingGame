@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,12 +15,17 @@ import javax.swing.JPanel;
 public class GameStartUI extends JPanel {
 
 	private CardGame window;
+	static boolean run = true;
 
 	static JPanel panelNorth;
 	static JPanel panelCenter;
 	static JPanel panelSouth;
 
-	//Base Pannel
+	// 포기 버튼
+	static JButton giveUpButton;
+	static JButton pauseButton;
+
+	// Base Pannel
 //	static JPanel basePanel;
 //	ImageIcon bgi = new ImageIcon("C:\\BGI.JPG");
 //	
@@ -36,9 +39,6 @@ public class GameStartUI extends JPanel {
 
 	static ArrayList<Card> deck;
 
-	// 포기 버튼
-	 static JButton Giveup;
-
 	// 하단 레이블 메시지 (remains, try)
 	static JLabel remainMessage;
 	static JLabel tryMessage;
@@ -49,15 +49,14 @@ public class GameStartUI extends JPanel {
 
 	// 0,1,2
 	static int openCardNumber;
-	
 
 	public GameStartUI(CardGame window) {
 		level = CardGame.stepLevel;
 		this.window = window;
-		
+
 		// basePanel에 배경이미지 삽입
-		//basePanel = new JPanel();
-		
+		// basePanel = new JPanel();
+
 		// 게임 안내문
 		panelNorth = new JPanel();
 		panelNorth.setLayout(new GridLayout(1, 2));
@@ -70,11 +69,42 @@ public class GameStartUI extends JPanel {
 		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 
-		// 포기버튼
-		Giveup = new JButton("게임 포기");
-		Giveup.setForeground(Color.WHITE);
-		Giveup.setBackground(Color.BLACK);
-		Giveup.addActionListener(new ActionListener() {
+		// 일시 정지/시작 버튼
+		pauseButton = new JButton(Utility.changeButtonImage("pause.png"));
+		pauseButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				// 게임 -> 일시정지
+				if (run) {
+					// 상태 바꿔주기
+					run = false;
+
+					// 모든 카드 비활성화
+					for (Card card : deck)
+						card.setEnabled(false);
+
+					// 아이콘 바꿔주기
+					pauseButton.setIcon(Utility.changeButtonImage("play.png"));
+				}
+				// 일시정지 -> 게임
+				else {
+					// 상태 바꿔주기
+					run = true;
+
+					// 모든 카드 활성화
+					for (Card card : deck)
+						card.setEnabled(true);
+
+					// 아이콘 바꿔주기
+					pauseButton.setIcon(Utility.changeButtonImage("pause.png"));
+				}
+			}
+		});
+
+		// 중단버튼 - 메뉴로
+		giveUpButton = new JButton(Utility.changeButtonImage("exit.png"));
+		giveUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				window.change("panel_1");
@@ -84,13 +114,15 @@ public class GameStartUI extends JPanel {
 				window.setLocationRelativeTo(null);
 			}
 		});
+
 		panelNorth.add(labelMessage); // 패널 상단에 위치시키기
-		panelNorth.add(Giveup);
+		panelNorth.add(pauseButton);
+		panelNorth.add(giveUpButton);
 		this.add("North", panelNorth);
 
 		// 게임 칸
 		panelCenter = new JPanel();
-		
+
 		// 난이도 별로 나누기
 		if (level == 0) {
 			deck = Card.createEasyDeck();
@@ -174,7 +206,7 @@ public class GameStartUI extends JPanel {
 				@Override
 				public void run() {
 					Utility.soundPlay("flip");
-					first.setIcon(Utility.changeImage(first.back));
+					first.setIcon(Utility.changeCardImage(first.back));
 				}
 			}, 500);
 
@@ -182,7 +214,7 @@ public class GameStartUI extends JPanel {
 				@Override
 				public void run() {
 					Utility.soundPlay("flip");
-					second.setIcon(Utility.changeImage(second.back));
+					second.setIcon(Utility.changeCardImage(second.back));
 				}
 			}, 700);
 		}

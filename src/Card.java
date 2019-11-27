@@ -40,7 +40,7 @@ public class Card extends JButton {
 		}
 
 		this.setPreferredSize(new Dimension(CARD_SIZE, CARD_SIZE));
-		this.setIcon(Utility.changeImage(back));
+		this.setIcon(Utility.changeCardImage(back));
 
 		this.addActionListener(new ActionListener() {
 
@@ -71,28 +71,30 @@ public class Card extends JButton {
 		}
 
 		this.setPreferredSize(new Dimension(CARD_SIZE, CARD_SIZE));
-		this.setIcon(Utility.changeImage(back));
+		this.setIcon(Utility.changeCardImage(back));
 	}
 
 	public void cardClick() {
+		// 정답 처리 안된 경우만 가능
+		if (!correct) {
+			// 앞면인 경우
+			if (open) {
+				flip();
+				GameStartUI.openCardNumber--;
+			}
+			// 뒷면인 경우
+			else {
+				flip();
+				GameStartUI.openCardNumber++;
+			}
 
-		// 앞면인 경우
-		if (open) {
-			flip();
-			GameStartUI.openCardNumber--;
-		}
-		// 뒷면인 경우
-		else {
-			flip();
-			GameStartUI.openCardNumber++;
-		}
+			if (GameStartUI.openCardNumber == 1) {
+				GameStartUI.firstSelect = this;
+			} else if (GameStartUI.openCardNumber == 2) {
+				GameStartUI.secondSelect = this;
 
-		if (GameStartUI.openCardNumber == 1) {
-			GameStartUI.firstSelect = this;
-		} else if (GameStartUI.openCardNumber == 2) {
-			GameStartUI.secondSelect = this;
-
-			GameStartUI.checking();
+				GameStartUI.checking();
+			}
 		}
 	}
 
@@ -192,10 +194,10 @@ public class Card extends JButton {
 			Utility.soundPlay("flip");
 
 			if (open) {
-				setIcon(Utility.changeImage(back));
+				setIcon(Utility.changeCardImage(back));
 				open = false;
 			} else {
-				setIcon(Utility.changeImage(front));
+				setIcon(Utility.changeCardImage(front));
 				open = true;
 			}
 
