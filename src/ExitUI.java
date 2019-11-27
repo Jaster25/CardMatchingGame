@@ -20,8 +20,8 @@ public class ExitUI extends JFrame {
 	// 게임 종료 안내문 메시지
 	static JLabel exitMessage;
 	// 게임 종료 선택 버튼
-	static JButton yesButton;
-	static JButton noButton;
+	static RoundButton yesButton;
+	static RoundButton noButton;
 
 	public void Exit() {
 		// 종료 안내 프레임 띄우기
@@ -51,11 +51,8 @@ public class ExitUI extends JFrame {
 		panelCenter.setPreferredSize(new Dimension(400, 100));
 		panelCenter.setLayout(new GridLayout(1, 2));
 
-		yesButton = new JButton(Utility.changeButtonImage("yes.png"));
+		yesButton = new RoundButton(Utility.changeButtonImage("yes.png"));
 		yesButton.setPreferredSize(new Dimension(150, 50));
-//		yesButton.setFont(new Font("Monaco", Font.BOLD, 25));
-//		yesButton.setForeground(Color.WHITE);
-//		yesButton.setBackground(Color.DARK_GRAY);
 		yesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -66,11 +63,8 @@ public class ExitUI extends JFrame {
 			}
 		});
 
-		noButton = new JButton(Utility.changeButtonImage("cancel.png"));
+		noButton = new RoundButton(Utility.changeButtonImage("cancel.png"));
 		noButton.setPreferredSize(new Dimension(150, 50));
-//		noButton.setFont(new Font("Monaco", Font.BOLD, 25));
-//		noButton.setForeground(Color.WHITE);
-//		noButton.setBackground(Color.DARK_GRAY);
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -22,8 +22,8 @@ public class GameStartUI extends JPanel {
 	static JPanel panelSouth;
 
 	// 포기 버튼
-	static JButton giveUpButton;
-	static JButton pauseButton;
+	static RoundButton giveUpButton;
+	static RoundButton pauseButton;
 
 	// Base Pannel
 //	static JPanel basePanel;
@@ -70,7 +70,7 @@ public class GameStartUI extends JPanel {
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 
 		// 일시 정지/시작 버튼
-		pauseButton = new JButton(Utility.changeButtonImage("pause.png"));
+		pauseButton = new RoundButton(Utility.changeButtonImage("pause.png"));
 		pauseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -103,7 +103,7 @@ public class GameStartUI extends JPanel {
 		});
 
 		// 중단버튼 - 메뉴로
-		giveUpButton = new JButton(Utility.changeButtonImage("exit.png"));
+		giveUpButton = new RoundButton(Utility.changeButtonImage("exit.png"));
 		giveUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

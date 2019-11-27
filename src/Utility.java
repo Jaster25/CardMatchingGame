@@ -37,7 +37,7 @@ public class Utility {
 	static ImageIcon changeButtonImage(String filename) {
 		ImageIcon icon = new ImageIcon("./images/" + filename);
 		Image originImage = icon.getImage();
-		Image changedImage = originImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		Image changedImage = originImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
 		ImageIcon icon_new = new ImageIcon(changedImage);
 		return icon_new;
