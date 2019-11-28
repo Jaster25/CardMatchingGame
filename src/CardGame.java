@@ -10,7 +10,6 @@ public class CardGame extends JFrame {
 
 	public void change(String panelName) {
 		if (panelName.equals("panel_1")) {
-
 			getContentPane().removeAll();
 			getContentPane().add(panel_1);
 			revalidate();
@@ -26,7 +25,7 @@ public class CardGame extends JFrame {
 	public static void main(String args[]) {
 		
 		window = new CardGame();
-
+		
 		window.setTitle("카드 짝 맞추기 게임");
 		window.panel_1 = new SelectLevelUI(window);
 		window.add(window.panel_1);

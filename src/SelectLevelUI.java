@@ -65,7 +65,6 @@ public class SelectLevelUI extends JPanel {
 
 		// exit¹öÆ°
 		panelSouth = new JPanel();
-
 		panelSouth.setPreferredSize(new Dimension(500, 80));
 		exitButton = new RoundButton(Utility.changeButtonImage("exit.png"));
 		exitButton.setPreferredSize(new Dimension(150, 70));
@@ -73,8 +72,10 @@ public class SelectLevelUI extends JPanel {
 		panelSouth.add(exitButton, "SOUTH");
 		this.add("SOUTH", panelSouth);
 		exitButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				
+				ExitUI.exitUI();
 			}
 		});
 
