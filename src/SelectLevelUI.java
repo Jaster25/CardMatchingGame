@@ -1,10 +1,14 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,7 +23,7 @@ public class SelectLevelUI extends JPanel {
 	static JLabel labelMessage;
 
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
-
+	private Image background;
 	// 게임 종료 버튼
 	static RoundButton exitButton;
 
@@ -43,12 +47,12 @@ public class SelectLevelUI extends JPanel {
 
 		// 게임 칸
 		panelCenter = new JPanel();
-
+		panelCenter.setOpaque(false);
 		panelCenter.setPreferredSize(new Dimension(500, 150));
 		buttons.add(new JButton("EASY"));
 		buttons.add(new JButton("NORMAL"));
 		buttons.add(new JButton("HARD"));
-
+		
 		for (int i = 0; i < 3; i++) {
 			buttons.get(i).setBackground(Color.WHITE);
 			buttons.get(i).setPreferredSize(new Dimension(100, 100));
@@ -65,6 +69,7 @@ public class SelectLevelUI extends JPanel {
 
 		// exit버튼
 		panelSouth = new JPanel();
+		panelSouth.setOpaque(false);
 		panelSouth.setPreferredSize(new Dimension(500, 80));
 		exitButton = new RoundButton(Utility.changeButtonImage("exit.png"));
 		exitButton.setPreferredSize(new Dimension(150, 70));
@@ -80,6 +85,13 @@ public class SelectLevelUI extends JPanel {
 		});
 
 	}
+	public void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+
+		background = new ImageIcon("./images/BGI.jpg")
+				.getImage();
+		g2.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+	}	
 
 	class MyActionListener implements ActionListener {
 		int level;
