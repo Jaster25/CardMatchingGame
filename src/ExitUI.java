@@ -25,8 +25,7 @@ public class ExitUI extends JFrame {
 
 	// GameStartUI 클리어시 뜨는 메뉴 - 한겜 더
 	public static void clearUI() {
-		GameStartUI.sec=0;
-		
+
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
 		exitFrame.setTitle("게임 종료" + GameStartUI.score);
@@ -61,7 +60,6 @@ public class ExitUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				exitFrame.removeAll();
 				exitFrame.dispose();
-				GameStartUI.tryCount = 0;
 				CardGame.replay();
 			}
 		});
@@ -71,7 +69,7 @@ public class ExitUI extends JFrame {
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				//게임종료
 				System.exit(0);
 			}
 		});
@@ -84,8 +82,9 @@ public class ExitUI extends JFrame {
 
 	// GameStartUI 나가기 버튼 누를시 - 진짜로 갈건지 묻는 UI
 	public static void goToMenuUI() {
-		//게임시간 스탑
-		GameStartUI.gameTimerRun = false;
+
+		// 우선 퍼즈
+		GameStartUI.pause();
 		
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
@@ -93,7 +92,7 @@ public class ExitUI extends JFrame {
 		exitFrame.setSize(400, 200);
 		exitFrame.setVisible(true);
 		exitFrame.setLocationRelativeTo(null);
-		exitFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		exitFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// 게임 종료 안내문
 		panelNorth = new JPanel();
@@ -109,7 +108,8 @@ public class ExitUI extends JFrame {
 		panelNorth.add(exitMessage);
 		exitFrame.add("North", panelNorth);
 
-		// 선택 버튼
+		// 선택 버튼 
+		// YES버튼 클릭시 게임 리셋
 		panelCenter = new JPanel();
 		panelCenter.setPreferredSize(new Dimension(400, 100));
 		panelCenter.setLayout(new GridLayout(1, 2));
@@ -119,9 +119,9 @@ public class ExitUI extends JFrame {
 		yesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// 게임 리셋
 				exitFrame.removeAll();
 				exitFrame.dispose();
-				GameStartUI.tryCount = 0;
 				CardGame.replay();
 			}
 		});
@@ -133,7 +133,6 @@ public class ExitUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				exitFrame.removeAll();
 				exitFrame.dispose();
-				GameStartUI.gameTimerRun = true;
 			}
 		});
 

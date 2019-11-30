@@ -79,7 +79,6 @@ public class SelectLevelUI extends JPanel {
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				ExitUI.exitUI();
 			}
 		});
@@ -104,7 +103,6 @@ public class SelectLevelUI extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			CardGame.stepLevel = this.level;
-
 			window.panel_2 = new GameStartUI(window);
 			window.resize(800, 900);
 			window.setLocationRelativeTo(null);

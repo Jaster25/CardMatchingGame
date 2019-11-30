@@ -14,9 +14,8 @@ import javax.swing.JPanel;
 public class GameStartUI extends JPanel {
 
 	private CardGame window;
-	static boolean run = true;
-
-	static boolean gameTimerRun = true;
+	static boolean run = false;
+	static boolean timerSoundRun = false;
 	static int sec;
 
 	static JPanel panelNorth;
@@ -87,12 +86,11 @@ public class GameStartUI extends JPanel {
 		giveUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				ExitUI.goToMenuUI();
 			}
 		});
-
-		panelNorth.add(labelMessage); // 패널 상단에 위치시키기
+		// 패널 상단에 위치시키기
+		panelNorth.add(labelMessage); 
 		panelNorth.add(pauseButton);
 		panelNorth.add(giveUpButton);
 		this.add("North", panelNorth);
@@ -172,15 +170,32 @@ public class GameStartUI extends JPanel {
 		gameTimer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (gameTimerRun) {
+				if (run) {
+
 					sec++;
-					labelMessage.setText("Timer : " + sec + " 초");
+					labelMessage.setText("Timer : " + sec);
 					labelMessage.setHorizontalAlignment(JLabel.CENTER);
+
+					// 사운드
+					if (!timerSoundRun) {
+
+						Utility.soundPlay("timer");
+						timerSoundRun = false;
+
+						// 틀고 4초 뒤 꺼지니 타이머 설정
+						gameTimer.schedule(new TimerTask() {
+
+							@Override
+							public void run() {
+								timerSoundRun = false;
+							}
+						}, 4000);
+					}
+
 				}
-				else
-				{
-					gameTimer.cancel();
-				}
+//	            else {
+//	               gameTimer.cancel();
+				// }
 			}
 		}, 0, 1000);
 	}
@@ -202,7 +217,6 @@ public class GameStartUI extends JPanel {
 
 			combo++;
 			score += combo * 100;
-
 			remains -= 2;
 			Utility.soundPlay("correct");
 			first.correct = true;
@@ -210,7 +224,6 @@ public class GameStartUI extends JPanel {
 
 			// 모든 카드의 짝을 맞출 경우 종료 프레임 띄우기
 			if (remains == 0) {
-				gameTimerRun = false;
 				ExitUI.clearUI();
 			}
 		} else {
@@ -245,6 +258,18 @@ public class GameStartUI extends JPanel {
 		labelMessageUpdate();
 	}
 
+	// 게임정보 리셋 메소드
+	public static void reset() {
+
+		run = false;
+		timerSoundRun = false;
+		sec = 0;
+		tryCount = 0;
+		score = 0;
+		combo = 0;
+		openCardNumber = 0;
+	}
+
 	// 일시정지 메소드
 	public static void pause() {
 
@@ -252,7 +277,6 @@ public class GameStartUI extends JPanel {
 		if (run) {
 			// 상태 바꿔주기
 			run = false;
-			gameTimerRun = false;
 			// 모든 카드 비활성화
 			for (Card card : deck)
 				card.setEnabled(false);
@@ -264,7 +288,6 @@ public class GameStartUI extends JPanel {
 		else {
 			// 상태 바꿔주기
 			run = true;
-			gameTimerRun = true;
 			// 모든 카드 활성화
 			for (Card card : deck)
 				card.setEnabled(true);
