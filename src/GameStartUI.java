@@ -36,6 +36,7 @@ public class GameStartUI extends JPanel {
 	static int remains;
 	static int score = 0;
 	static int combo = 0;
+	static int maxTime;
 
 	static ArrayList<Card> deck;
 
@@ -90,7 +91,7 @@ public class GameStartUI extends JPanel {
 			}
 		});
 		// 패널 상단에 위치시키기
-		panelNorth.add(labelMessage); 
+		panelNorth.add(labelMessage);
 		panelNorth.add(pauseButton);
 		panelNorth.add(giveUpButton);
 		this.add("North", panelNorth);
@@ -102,15 +103,18 @@ public class GameStartUI extends JPanel {
 		if (level == 0) {
 			deck = Card.createEasyDeck();
 			panelCenter.setLayout(new GridLayout(3, 3));
+			maxTime = 20;
 			remains = 8;
 		} else if (level == 1) {
 			deck = Card.createNormalDeck();
 			panelCenter.setLayout(new GridLayout(4, 4));
 			remains = 16;
+			maxTime = 30;
 		} else if (level == 2) {
 			deck = Card.createHardDeck();
 			panelCenter.setLayout(new GridLayout(5, 5));
 			remains = 24;
+			maxTime = 45;
 		}
 
 		panelCenter.setPreferredSize(new Dimension(600, 600));
@@ -180,7 +184,7 @@ public class GameStartUI extends JPanel {
 					if (!timerSoundRun) {
 
 						Utility.soundPlay("timer");
-						timerSoundRun = false;
+						timerSoundRun = run;
 
 						// 틀고 4초 뒤 꺼지니 타이머 설정
 						gameTimer.schedule(new TimerTask() {
@@ -215,9 +219,9 @@ public class GameStartUI extends JPanel {
 		// 정답일 경우
 		if (isCorrect()) {
 
-			combo++;
-			score += combo * 100;
+			score += (100 + (maxTime - sec) * 50) * ++combo;
 			remains -= 2;
+
 			Utility.soundPlay("correct");
 			first.correct = true;
 			second.correct = true;
@@ -229,7 +233,6 @@ public class GameStartUI extends JPanel {
 		} else {
 
 			combo = 0;
-			score -= 100;
 
 			Utility.soundPlay("wrong");
 			first.open = false;
