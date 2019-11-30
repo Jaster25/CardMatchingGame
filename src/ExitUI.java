@@ -25,6 +25,8 @@ public class ExitUI extends JFrame {
 
 	// GameStartUI 클리어시 뜨는 메뉴 - 한겜 더
 	public static void clearUI() {
+		GameStartUI.sec=0;
+		
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
 		exitFrame.setTitle("게임 종료" + GameStartUI.score);
@@ -82,6 +84,9 @@ public class ExitUI extends JFrame {
 
 	// GameStartUI 나가기 버튼 누를시 - 진짜로 갈건지 묻는 UI
 	public static void goToMenuUI() {
+		//게임시간 스탑
+		GameStartUI.gameTimerRun = false;
+		
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
 		exitFrame.setTitle("게임 종료");
@@ -128,6 +133,7 @@ public class ExitUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				exitFrame.removeAll();
 				exitFrame.dispose();
+				GameStartUI.gameTimerRun = true;
 			}
 		});
 

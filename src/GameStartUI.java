@@ -16,6 +16,9 @@ public class GameStartUI extends JPanel {
 	private CardGame window;
 	static boolean run = true;
 
+	static boolean gameTimerRun = true;
+	static int sec;
+
 	static JPanel panelNorth;
 	static JPanel panelCenter;
 	static JPanel panelSouth;
@@ -24,10 +27,6 @@ public class GameStartUI extends JPanel {
 	static RoundButton giveUpButton;
 	static RoundButton pauseButton;
 	static RoundButton timerButton;
-
-//  Base Pannel
-//	static JPanel basePanel;
-//	ImageIcon bgi = new ImageIcon("C:\\BGI.JPG");
 
 	// 게임 난이도 변수
 	private int level;
@@ -53,12 +52,11 @@ public class GameStartUI extends JPanel {
 	// 0,1,2
 	static int openCardNumber;
 
+	public static int count;
+
 	public GameStartUI(CardGame window) {
 		level = CardGame.stepLevel;
 		this.window = window;
-
-		// basePanel에 배경이미지 삽입
-		// basePanel = new JPanel();
 
 		// 게임 안내문
 		panelNorth = new JPanel();
@@ -66,14 +64,14 @@ public class GameStartUI extends JPanel {
 		panelNorth.setPreferredSize(new Dimension(600, 120));
 		panelNorth.setBackground(Color.DARK_GRAY);
 
-//		labelMessage = new JLabel("여기다 시간 넣을거임 ");
-//		labelMessage.setPreferredSize(new Dimension(600, 120));
-//		labelMessage.setForeground(Color.WHITE);
-//		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
-//		labelMessage.setHorizontalAlignment(JLabel.CENTER);
+		labelMessage = new JLabel("Timer : 0초");
+		labelMessage.setPreferredSize(new Dimension(600, 120));
+		labelMessage.setForeground(Color.WHITE);
+		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
+		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 
-		timerButton = new RoundButton(Utility.changeButtonImage("timer.png"));
-		timerButton.addComponentListener(null);
+//		timerButton = new RoundButton(Utility.changeButtonImage("timer.png"));
+//		timerButton.addComponentListener(null);
 
 		// 일시 정지, 재시작 버튼
 		pauseButton = new RoundButton(Utility.changeButtonImage("pause.png"));
@@ -89,13 +87,12 @@ public class GameStartUI extends JPanel {
 		giveUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				ExitUI.goToMenuUI();
 			}
 		});
 
-//		panelNorth.add(labelMessage); // 패널 상단에 위치시키기
-		panelNorth.add(timerButton);
+		panelNorth.add(labelMessage); // 패널 상단에 위치시키기
 		panelNorth.add(pauseButton);
 		panelNorth.add(giveUpButton);
 		this.add("North", panelNorth);
@@ -169,6 +166,23 @@ public class GameStartUI extends JPanel {
 //				}
 //			}
 //		}, 0, 60000);
+
+		// 게임 시간 타이머 시작
+		Timer gameTimer = new Timer();
+		gameTimer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (gameTimerRun) {
+					sec++;
+					labelMessage.setText("Timer : " + sec + " 초");
+					labelMessage.setHorizontalAlignment(JLabel.CENTER);
+				}
+				else
+				{
+					gameTimer.cancel();
+				}
+			}
+		}, 0, 1000);
 	}
 
 	public static boolean isCorrect() {
@@ -196,7 +210,7 @@ public class GameStartUI extends JPanel {
 
 			// 모든 카드의 짝을 맞출 경우 종료 프레임 띄우기
 			if (remains == 0) {
-
+				gameTimerRun = false;
 				ExitUI.clearUI();
 			}
 		} else {
@@ -238,7 +252,7 @@ public class GameStartUI extends JPanel {
 		if (run) {
 			// 상태 바꿔주기
 			run = false;
-
+			gameTimerRun = false;
 			// 모든 카드 비활성화
 			for (Card card : deck)
 				card.setEnabled(false);
@@ -250,7 +264,7 @@ public class GameStartUI extends JPanel {
 		else {
 			// 상태 바꿔주기
 			run = true;
-
+			gameTimerRun = true;
 			// 모든 카드 활성화
 			for (Card card : deck)
 				card.setEnabled(true);
@@ -262,9 +276,6 @@ public class GameStartUI extends JPanel {
 
 	// 상단 + 하단? JLabel 업데이트
 	public static void labelMessageUpdate() {
-//		labelMessage.setText("여기다 시간 넣을거임");
-//		labelMessage.setHorizontalAlignment(JLabel.CENTER);
-
 		remainMessage.setText("Remains Card : " + remains);
 		tryMessage.setText("try : " + tryCount);
 		scoreMessage.setText(score + "");
