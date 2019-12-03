@@ -5,7 +5,7 @@ public class CardGame extends JFrame {
 	public SelectLevelUI panel_1 = null; // 초기화면 UI패널
 	public GameStartUI panel_2 = null; // 게임 실행 되는 UI패널
 	static CardGame window;
-	
+
 	static int stepLevel;
 
 	public void change(String panelName) {
@@ -23,21 +23,19 @@ public class CardGame extends JFrame {
 	}
 
 	public static void main(String args[]) {
-		
+
 		window = new CardGame();
 		GameStartUI.reset();
+		GameStartUI.timerStart();
+
 		window.setTitle("카드 짝 맞추기 게임");
 		window.panel_1 = new SelectLevelUI(window);
 		window.add(window.panel_1);
 
-		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(500, 400);
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 	}
-	
-	static void replay() {
-		GameStartUI.reset();
-	}
-	
+
 }

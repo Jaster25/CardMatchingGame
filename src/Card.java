@@ -167,7 +167,6 @@ public class Card extends JButton {
 		return deck;
 	}
 
-// 뒤집혀 지는 순서?
 // 게임 시작시 카드 잠깐 보여주기
 	public static void startEffect(ArrayList<Card> deck) {
 
@@ -186,8 +185,14 @@ public class Card extends JButton {
 			}
 		}, 500);
 
-		GameStartUI.run = true;
-		GameStartUI.timerSoundRun = false;
+		Timer timer2 = new Timer();
+		timer2.schedule(new TimerTask() {
+			@Override
+			public void run() {
+
+				GameStartUI.run = true;
+			}
+		}, 1000);
 	}
 
 	// 카드 뒤집기 - 위에 카드 잠깐 보여주기에서 쓸 함수

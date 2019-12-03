@@ -51,7 +51,7 @@ public class SelectLevelUI extends JPanel {
 		buttons.add(new JButton("EASY"));
 		buttons.add(new JButton("NORMAL"));
 		buttons.add(new JButton("HARD"));
-		
+
 		for (int i = 0; i < 3; i++) {
 			buttons.get(i).setBackground(Color.WHITE);
 			buttons.get(i).setPreferredSize(new Dimension(100, 100));
@@ -83,13 +83,13 @@ public class SelectLevelUI extends JPanel {
 		});
 
 	}
+
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
-		background = new ImageIcon("./images/BGI.jpg")
-				.getImage();
+		background = new ImageIcon("./images/BGI.jpg").getImage();
 		g2.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-	}	
+	}
 
 	class MyActionListener implements ActionListener {
 		int level;

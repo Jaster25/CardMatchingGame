@@ -52,49 +52,6 @@ public class GameStartUI extends JPanel {
 	// 0,1,2
 	static int openCardNumber;
 
-	public static int count;
-
-	static Timer gameTimer = new Timer();
-
-	static void timerStart() {
-
-		gameTimer.schedule(new TimerTask() {
-			@Override
-
-			public void run() {
-				if (run) {
-
-					sec++;
-					labelMessage.setText("Timer : " + sec);
-					labelMessage.setHorizontalAlignment(JLabel.CENTER);
-
-//	               // 사운드
-//	               if (!timerSoundRun) {
-					//
-//	                  Utility.soundPlay("timer");
-//	                  timerSoundRun = run;
-					//
-//	                  // 틀고 4초 뒤 꺼지니 타이머 설정
-//	                  gameTimer.schedule(new TimerTask() {
-					//
-//	                     @Override
-//	                     public void run() {
-//	                        timerSoundRun = false;
-//	                     }
-//	                  }, 4000);
-//	               }
-
-				} else {
-					gameTimer.cancel();
-				}
-			}
-		}, 0, 1000);
-	}
-
-	static void timerStop() {
-		gameTimer.cancel();
-	}
-
 	// 게임판 생성자
 	public GameStartUI(CardGame window) {
 		level = CardGame.stepLevel;
@@ -197,20 +154,6 @@ public class GameStartUI extends JPanel {
 		// 카드 잠깐 보여주기
 		Card.startEffect(deck);
 
-//		// 타이머 사운드
-//		Timer timer = new Timer();
-//		timer.schedule(new TimerTask() {
-//
-//			@Override
-//			public void run() {
-//				// 게임 중이면
-//				if (GameStartUI.run) {
-//
-//					Media timerSound = new Media("./sounds/timerSound.mp3");
-//				}
-//			}
-//		}, 0, 60000);
-
 	}
 
 	public static boolean isCorrect() {
@@ -296,9 +239,6 @@ public class GameStartUI extends JPanel {
 			for (Card card : deck)
 				card.setEnabled(false);
 
-			// 시간스탑
-			timerStop();
-
 			// 아이콘 바꿔주기
 			pauseButton.setIcon(Utility.changeButtonImage("play.png"));
 		}
@@ -310,12 +250,43 @@ public class GameStartUI extends JPanel {
 			for (Card card : deck)
 				card.setEnabled(true);
 
-			// 시간 시작
-			timerStart();
-
 			// 아이콘 바꿔주기
 			pauseButton.setIcon(Utility.changeButtonImage("pause.png"));
 		}
+	}
+
+	static void timerStart() {
+
+		Timer gameTimer = new Timer();
+
+		TimerTask timerTask = new TimerTask() {
+
+			@Override
+			public void run() {
+				if (run) {
+					sec++;
+					labelMessageUpdate();
+				}
+
+//				// 사운드
+//				if (!timerSoundRun) {
+//
+//					Utility.soundPlay("timer");
+//					timerSoundRun = run;
+//
+//					// 틀고 4초 뒤 꺼지니 타이머 설정
+//					gameTimer.schedule(new TimerTask() {
+//
+//						@Override
+//						public void run() {
+//							timerSoundRun = false;
+//						}
+//					}, 4000);
+//				}
+			}
+		};
+
+		gameTimer.schedule(timerTask, 1, 1000);
 	}
 
 	// 상단 + 하단? JLabel 업데이트
@@ -323,7 +294,7 @@ public class GameStartUI extends JPanel {
 		remainMessage.setText("Remains Card : " + remains);
 		tryMessage.setText("try : " + tryCount);
 		scoreMessage.setText(score + "");
-		System.out.println("Remains Card : " + remains);
-		System.out.println("try : " + tryCount);
+		labelMessage.setText("Timer : " + GameStartUI.sec);
+		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 	}
 }

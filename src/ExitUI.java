@@ -5,14 +5,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ExitUI extends JFrame {
 
-	//static CardGame base_window;
+	// static CardGame base_window;
 	// 게임 종료 안내문 프레임
 	static JFrame exitFrame;
 	// 게임 종료 안내문 패널
@@ -62,11 +61,11 @@ public class ExitUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				exitFrame.removeAll();
 				exitFrame.dispose();
-				CardGame.replay();
+				GameStartUI.reset();
 				CardGame.window.panel_1 = new SelectLevelUI(CardGame.window);
 				CardGame.window.resize(500, 400);
 				CardGame.window.setLocationRelativeTo(null);
-				CardGame.window.change("panel_1");	
+				CardGame.window.change("panel_1");
 			}
 		});
 
@@ -75,7 +74,7 @@ public class ExitUI extends JFrame {
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//게임종료
+				// 게임종료
 				System.exit(0);
 			}
 		});
@@ -88,11 +87,11 @@ public class ExitUI extends JFrame {
 
 	// GameStartUI 나가기 버튼 누를시 - 진짜로 갈건지 묻는 UI
 	public static void goToMenuUI(CardGame window) {
-		//CardGame base_window = new CardGame();
-		//base_window = window;
+		// CardGame base_window = new CardGame();
+		// base_window = window;
 		// 우선 퍼즈
 		GameStartUI.pause();
-		
+
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
 		exitFrame.setTitle("게임 종료");
@@ -115,7 +114,7 @@ public class ExitUI extends JFrame {
 		panelNorth.add(exitMessage);
 		exitFrame.add("North", panelNorth);
 
-		// 선택 버튼 
+		// 선택 버튼
 		// YES버튼 클릭시 게임 리셋
 		panelCenter = new JPanel();
 		panelCenter.setPreferredSize(new Dimension(400, 100));
@@ -129,11 +128,14 @@ public class ExitUI extends JFrame {
 				// 게임 리셋
 				exitFrame.removeAll();
 				exitFrame.dispose();
-				CardGame.replay();
+
+				GameStartUI.reset();
+
 				window.panel_1 = new SelectLevelUI(window);
 				window.resize(500, 400);
 				window.setLocationRelativeTo(null);
-				window.change("panel_1");			}
+				window.change("panel_1");
+			}
 		});
 
 		noButton = new RoundButton(Utility.changeButtonImage("cancel.png"));
@@ -141,7 +143,7 @@ public class ExitUI extends JFrame {
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				exitFrame.removeAll();
 				exitFrame.dispose();
 
