@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 public class GameStartUI extends JPanel {
 
+	private CardGame window;
 	static boolean run = false;
 	static boolean timerSoundRun = false;
 	static int sec;
@@ -53,8 +54,51 @@ public class GameStartUI extends JPanel {
 
 	public static int count;
 
-	public GameStartUI() {
+	static Timer gameTimer = new Timer();
+
+	static void timerStart() {
+
+		gameTimer.schedule(new TimerTask() {
+			@Override
+
+			public void run() {
+				if (run) {
+
+					sec++;
+					labelMessage.setText("Timer : " + sec);
+					labelMessage.setHorizontalAlignment(JLabel.CENTER);
+
+//	               // 사운드
+//	               if (!timerSoundRun) {
+					//
+//	                  Utility.soundPlay("timer");
+//	                  timerSoundRun = run;
+					//
+//	                  // 틀고 4초 뒤 꺼지니 타이머 설정
+//	                  gameTimer.schedule(new TimerTask() {
+					//
+//	                     @Override
+//	                     public void run() {
+//	                        timerSoundRun = false;
+//	                     }
+//	                  }, 4000);
+//	               }
+
+				} else {
+					gameTimer.cancel();
+				}
+			}
+		}, 0, 1000);
+	}
+
+	static void timerStop() {
+		gameTimer.cancel();
+	}
+
+	// 게임판 생성자
+	public GameStartUI(CardGame window) {
 		level = CardGame.stepLevel;
+		this.window = window;
 
 		// 게임 안내문
 		panelNorth = new JPanel();
@@ -62,7 +106,7 @@ public class GameStartUI extends JPanel {
 		panelNorth.setPreferredSize(new Dimension(600, 120));
 		panelNorth.setBackground(Color.DARK_GRAY);
 
-		labelMessage = new JLabel("Timer : 0초");
+		labelMessage = new JLabel("Timer : 0");
 		labelMessage.setPreferredSize(new Dimension(600, 120));
 		labelMessage.setForeground(Color.WHITE);
 		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
@@ -85,14 +129,14 @@ public class GameStartUI extends JPanel {
 		giveUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ExitUI.goToMenuUI();
+				ExitUI.goToMenuUI(window);
 			}
 		});
 		// 패널 상단에 위치시키기
 		panelNorth.add(labelMessage);
 		panelNorth.add(pauseButton);
 		panelNorth.add(giveUpButton);
-		CardGame.window.add("North", panelNorth);
+		this.add("North", panelNorth);
 
 		// 게임 칸
 		panelCenter = new JPanel();
@@ -119,7 +163,7 @@ public class GameStartUI extends JPanel {
 		for (Card card : deck)
 			panelCenter.add(card);
 
-		CardGame.window.add("Center", panelCenter);
+		this.add("Center", panelCenter);
 
 		// 하단 레이블 메시지(remains, try)
 		panelSouth = new JPanel();
@@ -148,7 +192,7 @@ public class GameStartUI extends JPanel {
 		panelSouth.add(remainMessage);
 		panelSouth.add(scoreMessage);
 		panelSouth.add(tryMessage);
-		CardGame.window.add("SOUTH", panelSouth);
+		this.add("SOUTH", panelSouth);
 
 		// 카드 잠깐 보여주기
 		Card.startEffect(deck);
@@ -167,39 +211,6 @@ public class GameStartUI extends JPanel {
 //			}
 //		}, 0, 60000);
 
-		// 게임 시간 타이머 시작
-		Timer gameTimer = new Timer();
-		gameTimer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				if (run) {
-
-					sec++;
-					labelMessage.setText("Timer : " + sec);
-					labelMessage.setHorizontalAlignment(JLabel.CENTER);
-
-					// 사운드
-//					if (!timerSoundRun) {
-//
-//						Utility.soundPlay("timer");
-//						timerSoundRun = run;
-//
-//						// 틀고 4초 뒤 꺼지니 타이머 설정
-//						gameTimer.schedule(new TimerTask() {
-//
-//							@Override
-//							public void run() {
-//								timerSoundRun = false;
-//							}
-//						}, 4000);
-//					}
-
-				}
-	            else {
-	               gameTimer.cancel();
-				 }
-			}
-		}, 0, 1000);
 	}
 
 	public static boolean isCorrect() {
@@ -285,6 +296,9 @@ public class GameStartUI extends JPanel {
 			for (Card card : deck)
 				card.setEnabled(false);
 
+			// 시간스탑
+			timerStop();
+
 			// 아이콘 바꿔주기
 			pauseButton.setIcon(Utility.changeButtonImage("play.png"));
 		}
@@ -296,6 +310,9 @@ public class GameStartUI extends JPanel {
 			for (Card card : deck)
 				card.setEnabled(true);
 
+			// 시간 시작
+			timerStart();
+
 			// 아이콘 바꿔주기
 			pauseButton.setIcon(Utility.changeButtonImage("pause.png"));
 		}
@@ -306,7 +323,7 @@ public class GameStartUI extends JPanel {
 		remainMessage.setText("Remains Card : " + remains);
 		tryMessage.setText("try : " + tryCount);
 		scoreMessage.setText(score + "");
-		System.out.println("Remains Card : "+remains);
+		System.out.println("Remains Card : " + remains);
 		System.out.println("try : " + tryCount);
 	}
 }

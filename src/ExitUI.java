@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 public class ExitUI extends JFrame {
 
+	//static CardGame base_window;
 	// 게임 종료 안내문 프레임
 	static JFrame exitFrame;
 	// 게임 종료 안내문 패널
@@ -62,8 +63,7 @@ public class ExitUI extends JFrame {
 				exitFrame.removeAll();
 				exitFrame.dispose();
 				CardGame.replay();
-				CardGame window = new CardGame();
-				CardGame.window.panel_1 = new SelectLevelUI();
+				CardGame.window.panel_1 = new SelectLevelUI(CardGame.window);
 				CardGame.window.resize(500, 400);
 				CardGame.window.setLocationRelativeTo(null);
 				CardGame.window.change("panel_1");	
@@ -87,7 +87,9 @@ public class ExitUI extends JFrame {
 	}
 
 	// GameStartUI 나가기 버튼 누를시 - 진짜로 갈건지 묻는 UI
-	public static void goToMenuUI() {
+	public static void goToMenuUI(CardGame window) {
+		//CardGame base_window = new CardGame();
+		//base_window = window;
 		// 우선 퍼즈
 		GameStartUI.pause();
 		
@@ -128,11 +130,10 @@ public class ExitUI extends JFrame {
 				exitFrame.removeAll();
 				exitFrame.dispose();
 				CardGame.replay();
-				CardGame window = new CardGame();
-				CardGame.window.panel_1 = new SelectLevelUI();
-				CardGame.window.resize(500, 400);
-				CardGame.window.setLocationRelativeTo(null);
-				CardGame.window.change("panel_1");			}
+				window.panel_1 = new SelectLevelUI(window);
+				window.resize(500, 400);
+				window.setLocationRelativeTo(null);
+				window.change("panel_1");			}
 		});
 
 		noButton = new RoundButton(Utility.changeButtonImage("cancel.png"));

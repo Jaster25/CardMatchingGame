@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 public class SelectLevelUI extends JPanel {
 
+	private CardGame window;
 
 	static JPanel panelNorth;
 	static JPanel panelCenter;
@@ -27,8 +28,9 @@ public class SelectLevelUI extends JPanel {
 	static RoundButton exitButton;
 
 	// 초기화면 생성자
-	public SelectLevelUI() {
+	public SelectLevelUI(CardGame window) {
 
+		this.window = window;
 		// 게임 안내문
 		panelNorth = new JPanel();
 		panelNorth.setPreferredSize(new Dimension(800, 100));
@@ -40,7 +42,7 @@ public class SelectLevelUI extends JPanel {
 		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 		panelNorth.add(labelMessage, "NORTH"); // 패널 상단에 위치시키기
-		CardGame.window.add("NORTH", panelNorth);
+		this.add("NORTH", panelNorth);
 
 		// 게임 칸
 		panelCenter = new JPanel();
@@ -59,7 +61,7 @@ public class SelectLevelUI extends JPanel {
 		panelCenter.add(buttons.get(1), "CENTER");
 		panelCenter.add(buttons.get(2), "CENTER");
 
-		CardGame.window.add("CENTER", panelCenter);
+		this.add("CENTER", panelCenter);
 
 		for (int i = 0; i < 3; ++i)
 			buttons.get(i).addActionListener(new MyActionListener(i));
@@ -72,7 +74,7 @@ public class SelectLevelUI extends JPanel {
 		exitButton.setPreferredSize(new Dimension(150, 70));
 
 		panelSouth.add(exitButton, "SOUTH");
-		CardGame.window.add("SOUTH", panelSouth);
+		this.add("SOUTH", panelSouth);
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -100,10 +102,10 @@ public class SelectLevelUI extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			CardGame.stepLevel = this.level;
-			CardGame.window.panel_2 = new GameStartUI();
-			CardGame.window.resize(800, 900);
-			CardGame.window.setLocationRelativeTo(null);
-			CardGame.window.change("panel_2");
+			window.panel_2 = new GameStartUI(window);
+			window.resize(800, 900);
+			window.setLocationRelativeTo(null);
+			window.change("panel_2");
 		}
 	}
 }
