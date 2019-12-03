@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 public class GameStartUI extends JPanel {
 
-	private CardGame window;
 	static boolean run = false;
 	static boolean timerSoundRun = false;
 	static int sec;
@@ -54,9 +53,8 @@ public class GameStartUI extends JPanel {
 
 	public static int count;
 
-	public GameStartUI(CardGame window) {
+	public GameStartUI() {
 		level = CardGame.stepLevel;
-		this.window = window;
 
 		// 게임 안내문
 		panelNorth = new JPanel();
@@ -94,7 +92,7 @@ public class GameStartUI extends JPanel {
 		panelNorth.add(labelMessage);
 		panelNorth.add(pauseButton);
 		panelNorth.add(giveUpButton);
-		this.add("North", panelNorth);
+		CardGame.window.add("North", panelNorth);
 
 		// 게임 칸
 		panelCenter = new JPanel();
@@ -121,7 +119,7 @@ public class GameStartUI extends JPanel {
 		for (Card card : deck)
 			panelCenter.add(card);
 
-		this.add("Center", panelCenter);
+		CardGame.window.add("Center", panelCenter);
 
 		// 하단 레이블 메시지(remains, try)
 		panelSouth = new JPanel();
@@ -150,7 +148,7 @@ public class GameStartUI extends JPanel {
 		panelSouth.add(remainMessage);
 		panelSouth.add(scoreMessage);
 		panelSouth.add(tryMessage);
-		this.add("SOUTH", panelSouth);
+		CardGame.window.add("SOUTH", panelSouth);
 
 		// 카드 잠깐 보여주기
 		Card.startEffect(deck);
@@ -181,25 +179,25 @@ public class GameStartUI extends JPanel {
 					labelMessage.setHorizontalAlignment(JLabel.CENTER);
 
 					// 사운드
-					if (!timerSoundRun) {
-
-						Utility.soundPlay("timer");
-						timerSoundRun = run;
-
-						// 틀고 4초 뒤 꺼지니 타이머 설정
-						gameTimer.schedule(new TimerTask() {
-
-							@Override
-							public void run() {
-								timerSoundRun = false;
-							}
-						}, 4000);
-					}
+//					if (!timerSoundRun) {
+//
+//						Utility.soundPlay("timer");
+//						timerSoundRun = run;
+//
+//						// 틀고 4초 뒤 꺼지니 타이머 설정
+//						gameTimer.schedule(new TimerTask() {
+//
+//							@Override
+//							public void run() {
+//								timerSoundRun = false;
+//							}
+//						}, 4000);
+//					}
 
 				}
-//	            else {
-//	               gameTimer.cancel();
-				// }
+	            else {
+	               gameTimer.cancel();
+				 }
 			}
 		}, 0, 1000);
 	}
@@ -219,7 +217,10 @@ public class GameStartUI extends JPanel {
 		// 정답일 경우
 		if (isCorrect()) {
 
-			score += (100 + (maxTime - sec) * 50) * ++combo;
+			if (maxTime > sec)
+				score += (100 + (maxTime - sec) * 50) * ++combo;
+			else
+				score += 100 * ++combo;
 			remains -= 2;
 
 			Utility.soundPlay("correct");
@@ -305,5 +306,7 @@ public class GameStartUI extends JPanel {
 		remainMessage.setText("Remains Card : " + remains);
 		tryMessage.setText("try : " + tryCount);
 		scoreMessage.setText(score + "");
+		System.out.println("Remains Card : "+remains);
+		System.out.println("try : " + tryCount);
 	}
 }

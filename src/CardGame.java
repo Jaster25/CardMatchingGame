@@ -27,7 +27,7 @@ public class CardGame extends JFrame {
 		window = new CardGame();
 		GameStartUI.reset();
 		window.setTitle("카드 짝 맞추기 게임");
-		window.panel_1 = new SelectLevelUI(window);
+		window.panel_1 = new SelectLevelUI();
 		window.add(window.panel_1);
 
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -38,19 +38,20 @@ public class CardGame extends JFrame {
 	
 	static void replay() {
 		
-		window.removeAll();
-		window.dispose();
+		//window.removeAll();
+		//window.dispose();
 		
-		window = new CardGame();
+		//window = new CardGame();
 		GameStartUI.reset();
-		window.setTitle("카드 짝 맞추기 게임");
-		window.panel_1 = new SelectLevelUI(window);
-		window.add(window.panel_1);
-
-		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		window.setSize(500, 400);
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
+		
+//		window.setTitle("카드 짝 맞추기 게임");
+//		window.panel_1 = new SelectLevelUI(window);
+//		window.add(window.panel_1);
+//
+//		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//		window.setSize(500, 400);
+//		window.setLocationRelativeTo(null);
+//		window.setVisible(true);
 	}
 	
 }

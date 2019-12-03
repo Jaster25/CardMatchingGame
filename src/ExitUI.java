@@ -26,6 +26,7 @@ public class ExitUI extends JFrame {
 	// GameStartUI 클리어시 뜨는 메뉴 - 한겜 더
 	public static void clearUI() {
 
+		GameStartUI.pause();
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
 		exitFrame.setTitle("게임 종료" + GameStartUI.score);
@@ -61,6 +62,11 @@ public class ExitUI extends JFrame {
 				exitFrame.removeAll();
 				exitFrame.dispose();
 				CardGame.replay();
+				CardGame window = new CardGame();
+				CardGame.window.panel_1 = new SelectLevelUI();
+				CardGame.window.resize(500, 400);
+				CardGame.window.setLocationRelativeTo(null);
+				CardGame.window.change("panel_1");	
 			}
 		});
 
@@ -82,7 +88,6 @@ public class ExitUI extends JFrame {
 
 	// GameStartUI 나가기 버튼 누를시 - 진짜로 갈건지 묻는 UI
 	public static void goToMenuUI() {
-
 		// 우선 퍼즈
 		GameStartUI.pause();
 		
@@ -123,7 +128,11 @@ public class ExitUI extends JFrame {
 				exitFrame.removeAll();
 				exitFrame.dispose();
 				CardGame.replay();
-			}
+				CardGame window = new CardGame();
+				CardGame.window.panel_1 = new SelectLevelUI();
+				CardGame.window.resize(500, 400);
+				CardGame.window.setLocationRelativeTo(null);
+				CardGame.window.change("panel_1");			}
 		});
 
 		noButton = new RoundButton(Utility.changeButtonImage("cancel.png"));
@@ -131,8 +140,10 @@ public class ExitUI extends JFrame {
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				exitFrame.removeAll();
 				exitFrame.dispose();
+
 			}
 		});
 
