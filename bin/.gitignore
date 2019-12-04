@@ -1,5 +1,6 @@
 /Card$1.class
 /Card$2.class
+/Card$3.class
 /Card.class
 /CardGame.class
 /ExitUI$1.class
@@ -11,7 +12,6 @@
 /ExitUI.class
 /GameStartUI$1.class
 /GameStartUI$2.class
-/GameStartUI$3$1.class
 /GameStartUI$3.class
 /GameStartUI$4.class
 /GameStartUI$5.class
@@ -22,5 +22,3 @@
 /SelectLevelUI$MyActionListener.class
 /SelectLevelUI.class
 /Utility.class
-/Card$3.class
-/GameStartUI$5$1.class

@@ -17,7 +17,10 @@ public class ExitUI extends JFrame {
 	// 게임 종료 안내문 패널
 	static JPanel panelNorth;
 	static JPanel panelCenter;
+	static JPanel panelSouth;
 	// 게임 종료 안내문 메시지
+	static JLabel scoreMessage;
+	static JLabel timeScoreMessage;
 	static JLabel exitMessage;
 	// 게임 종료 선택 버튼
 	static RoundButton yesButton;
@@ -30,29 +33,49 @@ public class ExitUI extends JFrame {
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
 		exitFrame.setTitle("게임 종료" + GameStartUI.score);
-		exitFrame.setSize(400, 200);
+		exitFrame.setSize(400, 300);
 		exitFrame.setVisible(true);
 		exitFrame.setLocationRelativeTo(null);
 		exitFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// 게임 종료 안내문
+		// 게임 점수와 클리어 시간 안내문
 		panelNorth = new JPanel();
-		panelNorth.setLayout(new GridLayout(1, 1));
-		panelNorth.setPreferredSize(new Dimension(400, 80));
-		panelNorth.setBackground(Color.GRAY);
+		panelNorth.setLayout(new GridLayout(1,2));
+		panelNorth.setPreferredSize(new Dimension(400,100));
+		panelNorth.setBackground(Color.WHITE);
+		
+		scoreMessage = new JLabel("Score : "+GameStartUI.score);
+		scoreMessage.setPreferredSize(new Dimension(400, 50));
+		scoreMessage.setFont(new Font("Monaco", Font.BOLD, 20));
+		scoreMessage.setHorizontalAlignment(JLabel.CENTER);
+		
+		timeScoreMessage = new JLabel("Time Record : "+GameStartUI.sec);
+		timeScoreMessage.setPreferredSize(new Dimension(400, 50));
+		timeScoreMessage.setFont(new Font("Monaco", Font.BOLD, 20));
+		timeScoreMessage.setHorizontalAlignment(JLabel.CENTER);
+		
+		panelNorth.add(scoreMessage);
+		panelNorth.add(timeScoreMessage);
+		exitFrame.add("North", panelNorth);
+		
+		// 게임 종료 안내문
+		panelCenter = new JPanel();
+		panelCenter.setLayout(new GridLayout(1, 1));
+		panelCenter.setPreferredSize(new Dimension(400, 80));
+		panelCenter.setBackground(Color.GRAY);
 
 		exitMessage = new JLabel("난이도를 다시 선택하시겠습니까?");
 		exitMessage.setPreferredSize(new Dimension(400, 80));
 		exitMessage.setForeground(Color.WHITE);
 		exitMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		exitMessage.setHorizontalAlignment(JLabel.CENTER);
-		panelNorth.add(exitMessage);
-		exitFrame.add("North", panelNorth);
+		panelCenter.add(exitMessage);
+		exitFrame.add("Center", panelCenter);
 
 		// 선택 버튼
-		panelCenter = new JPanel();
-		panelCenter.setPreferredSize(new Dimension(400, 100));
-		panelCenter.setLayout(new GridLayout(1, 2));
+		panelSouth = new JPanel();
+		panelSouth.setPreferredSize(new Dimension(400, 100));
+		panelSouth.setLayout(new GridLayout(1, 2));
 
 		yesButton = new RoundButton(Utility.changeButtonImage("yes.png"));
 		yesButton.setPreferredSize(new Dimension(150, 50));
@@ -79,10 +102,10 @@ public class ExitUI extends JFrame {
 			}
 		});
 
-		panelCenter.add(yesButton, "CENTER");
-		panelCenter.add(noButton, "CENTER");
+		panelSouth.add(yesButton, "CENTER");
+		panelSouth.add(noButton, "CENTER");
 
-		exitFrame.add("Center", panelCenter);
+		exitFrame.add("South", panelSouth);
 	}
 
 	// GameStartUI 나가기 버튼 누를시 - 진짜로 갈건지 묻는 UI
