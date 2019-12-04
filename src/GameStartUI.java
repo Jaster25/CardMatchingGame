@@ -1,13 +1,17 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,7 +19,6 @@ public class GameStartUI extends JPanel {
 
 	private CardGame window;
 	static boolean run = false;
-	static boolean timerSoundRun = false;
 	static int sec;
 
 	static JPanel panelNorth;
@@ -69,9 +72,6 @@ public class GameStartUI extends JPanel {
 		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 
-//		timerButton = new RoundButton(Utility.changeButtonImage("timer.png"));
-//		timerButton.addComponentListener(null);
-
 		// 일시 정지, 재시작 버튼
 		pauseButton = new RoundButton(Utility.changeButtonImage("pause.png"));
 		pauseButton.addActionListener(new ActionListener() {
@@ -86,6 +86,8 @@ public class GameStartUI extends JPanel {
 		giveUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (run)
+					pause();
 				ExitUI.goToMenuUI(window);
 			}
 		});
@@ -220,7 +222,6 @@ public class GameStartUI extends JPanel {
 	public static void reset() {
 
 		run = false;
-		timerSoundRun = false;
 		sec = 0;
 		tryCount = 0;
 		score = 0;
@@ -266,23 +267,9 @@ public class GameStartUI extends JPanel {
 				if (run) {
 					sec++;
 					labelMessageUpdate();
-				}
 
-//				// 사운드
-//				if (!timerSoundRun) {
-//
-//					Utility.soundPlay("timer");
-//					timerSoundRun = run;
-//
-//					// 틀고 4초 뒤 꺼지니 타이머 설정
-//					gameTimer.schedule(new TimerTask() {
-//
-//						@Override
-//						public void run() {
-//							timerSoundRun = false;
-//						}
-//					}, 4000);
-//				}
+					Utility.soundPlay("timer");
+				}
 			}
 		};
 
@@ -297,4 +284,14 @@ public class GameStartUI extends JPanel {
 		labelMessage.setText("Timer : " + GameStartUI.sec);
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 	}
+
+	private Image background;
+
+	public void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+
+		background = new ImageIcon("./images/BGI2.png").getImage();
+		g2.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+	}
+
 }

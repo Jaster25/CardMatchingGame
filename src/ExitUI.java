@@ -87,10 +87,6 @@ public class ExitUI extends JFrame {
 
 	// GameStartUI 나가기 버튼 누를시 - 진짜로 갈건지 묻는 UI
 	public static void goToMenuUI(CardGame window) {
-		// CardGame base_window = new CardGame();
-		// base_window = window;
-		// 우선 퍼즈
-		GameStartUI.pause();
 
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();

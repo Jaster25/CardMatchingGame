@@ -1,4 +1,3 @@
-
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,9 @@ import javax.swing.JButton;
 public class Card extends JButton {
 
 	static int CARD_SIZE;
+
+	// 카드 이미지 총 개수 = 18개
+	static final int CARD_TYPES = 18;
 
 	// 앞면 true, 뒷면 false
 	boolean open;
@@ -98,15 +100,28 @@ public class Card extends JButton {
 		}
 	}
 
-	// 카드 덱 생성 함수
+	// 난이도에 맞는 카드 덱 생성 함수
 	static ArrayList<Card> createEasyDeck() {
 
 		ArrayList<Card> deck = new ArrayList<Card>();
+		ArrayList<Integer> usedCardTypes = new ArrayList<Integer>();
 
 		// 쌍으로
 		for (int i = 1; i <= 4; ++i) {
-			Card newCard1 = new Card(i);
-			Card newCard2 = new Card(i);
+
+			int randomType;
+
+			while (true) {
+				randomType = (int) (Math.random() * CARD_TYPES + 1);
+
+				if (!usedCardTypes.contains(randomType)) {
+					usedCardTypes.add(randomType);
+					break;
+				}
+			}
+
+			Card newCard1 = new Card(randomType);
+			Card newCard2 = new Card(randomType);
 
 			deck.add(newCard1);
 			deck.add(newCard2);
@@ -126,11 +141,24 @@ public class Card extends JButton {
 	static ArrayList<Card> createNormalDeck() {
 
 		ArrayList<Card> deck = new ArrayList<Card>();
+		ArrayList<Integer> usedCardTypes = new ArrayList<Integer>();
 
 		// 쌍으로
 		for (int i = 1; i <= 8; ++i) {
-			Card newCard1 = new Card(i);
-			Card newCard2 = new Card(i);
+
+			int randomType;
+
+			while (true) {
+				randomType = (int) (Math.random() * CARD_TYPES + 1);
+
+				if (!usedCardTypes.contains(randomType)) {
+					usedCardTypes.add(randomType);
+					break;
+				}
+			}
+
+			Card newCard1 = new Card(randomType);
+			Card newCard2 = new Card(randomType);
 
 			deck.add(newCard1);
 			deck.add(newCard2);
@@ -146,11 +174,24 @@ public class Card extends JButton {
 	static ArrayList<Card> createHardDeck() {
 
 		ArrayList<Card> deck = new ArrayList<Card>();
+		ArrayList<Integer> usedCardTypes = new ArrayList<Integer>();
 
 		// 쌍으로
 		for (int i = 1; i <= 12; ++i) {
-			Card newCard1 = new Card(i);
-			Card newCard2 = new Card(i);
+
+			int randomType;
+
+			while (true) {
+				randomType = (int) (Math.random() * CARD_TYPES + 1);
+
+				if (!usedCardTypes.contains(randomType)) {
+					usedCardTypes.add(randomType);
+					break;
+				}
+			}
+
+			Card newCard1 = new Card(randomType);
+			Card newCard2 = new Card(randomType);
 
 			deck.add(newCard1);
 			deck.add(newCard2);
@@ -167,7 +208,7 @@ public class Card extends JButton {
 		return deck;
 	}
 
-// 게임 시작시 카드 잠깐 보여주기
+	// 게임 시작시 카드 잠깐 보여주기
 	public static void startEffect(ArrayList<Card> deck) {
 
 		for (Card card : deck) {

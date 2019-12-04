@@ -29,22 +29,19 @@ public class RoundButton extends JButton {
 
 	void setting() {
 		// 적용되는지?
-		setSize(50,50);
+		setSize(50, 50);
 		setBorderPainted(false);
 		setContentAreaFilled(false);
 		setOpaque(false);
-		
+
 		addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Utility.soundPlay("buttonClickSound");
-				
+
 			}
 		});
 	}
-	
-	// hover 효과
-	// 클릭시 작아지는
-	
+
 }
