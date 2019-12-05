@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,24 +34,22 @@ public class SelectLevelUI extends JPanel {
 		this.window = window;
 		// 게임 안내문
 		panelNorth = new JPanel();
-		panelNorth.setPreferredSize(new Dimension(800, 100));
-		panelNorth.setBackground(Color.DARK_GRAY);
+		panelNorth.setPreferredSize(new Dimension(500, 100));
+		//panelNorth.setBackground(Color.WHITE);
 
-		labelMessage = new JLabel("난이도를 선택하세요");
-		labelMessage.setPreferredSize(new Dimension(800, 100));
-		labelMessage.setForeground(Color.WHITE);
-		labelMessage.setFont(new Font("Monaco", Font.BOLD, 20));
+		labelMessage = new JLabel(Utility.changeButtonImage("Title.jpg"));
+		labelMessage.setPreferredSize(new Dimension(500, 100));
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
-		panelNorth.add(labelMessage, "NORTH"); // 패널 상단에 위치시키기
+		
+		panelNorth.add(labelMessage, "NORTH"); 
 		this.add("NORTH", panelNorth);
-
 		// 게임 칸
 		panelCenter = new JPanel();
 		panelCenter.setOpaque(false);
-		panelCenter.setPreferredSize(new Dimension(500, 150));
-		buttons.add(new JButton("EASY"));
-		buttons.add(new JButton("NORMAL"));
-		buttons.add(new JButton("HARD"));
+		panelCenter.setPreferredSize(new Dimension(500, 110));
+		buttons.add(new JButton(Utility.changeButtonImage("easy.jpg")));
+		buttons.add(new JButton(Utility.changeButtonImage("normal.jpg")));
+		buttons.add(new JButton(Utility.changeButtonImage("hard.jpg")));
 
 		for (int i = 0; i < 3; i++) {
 			buttons.get(i).setBackground(Color.WHITE);
@@ -60,7 +59,6 @@ public class SelectLevelUI extends JPanel {
 		panelCenter.add(buttons.get(0), "CENTER");
 		panelCenter.add(buttons.get(1), "CENTER");
 		panelCenter.add(buttons.get(2), "CENTER");
-
 		this.add("CENTER", panelCenter);
 
 		for (int i = 0; i < 3; ++i)
@@ -69,9 +67,9 @@ public class SelectLevelUI extends JPanel {
 		// exit버튼
 		panelSouth = new JPanel();
 		panelSouth.setOpaque(false);
-		panelSouth.setPreferredSize(new Dimension(500, 80));
+		panelSouth.setPreferredSize(new Dimension(500, 100));
 		exitButton = new RoundButton(Utility.changeButtonImage("exit.png"));
-		exitButton.setPreferredSize(new Dimension(150, 70));
+		exitButton.setPreferredSize(new Dimension(100, 65));
 
 		panelSouth.add(exitButton, "SOUTH");
 		this.add("SOUTH", panelSouth);
@@ -81,7 +79,6 @@ public class SelectLevelUI extends JPanel {
 				ExitUI.exitUI();
 			}
 		});
-
 	}
 
 	public void paintComponent(Graphics g) {

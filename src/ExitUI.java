@@ -86,7 +86,7 @@ public class ExitUI extends JFrame {
 				exitFrame.dispose();
 				GameStartUI.reset();
 				CardGame.window.panel_1 = new SelectLevelUI(CardGame.window);
-				CardGame.window.resize(500, 400);
+				CardGame.window.resize(500, 335);
 				CardGame.window.setLocationRelativeTo(null);
 				CardGame.window.change("panel_1");
 			}
@@ -151,7 +151,7 @@ public class ExitUI extends JFrame {
 				GameStartUI.reset();
 
 				window.panel_1 = new SelectLevelUI(window);
-				window.resize(500, 400);
+				window.resize(500, 335);
 				window.setLocationRelativeTo(null);
 				window.change("panel_1");
 			}

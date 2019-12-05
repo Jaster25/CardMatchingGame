@@ -37,6 +37,23 @@ public class Utility {
 	static ImageIcon changeButtonImage(String fileName) {
 		ImageIcon icon = new ImageIcon("./images/" + fileName);
 		Image originImage = icon.getImage();
+
+		// 타이틀 배너
+		if (fileName.equals("Title.jpg")) {
+			Image changedImage = originImage.getScaledInstance(500, 100, Image.SCALE_SMOOTH);
+
+			ImageIcon icon_new = new ImageIcon(changedImage);
+			return icon_new;
+		}
+
+		// 난이도 선택 버튼
+		if (fileName.equals("easy.jpg") || fileName.equals("normal.jpg") || fileName.equals("hard.jpg")) {
+			Image changedImage = originImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+			ImageIcon icon_new = new ImageIcon(changedImage);
+			return icon_new;
+		}
+		// 나가기, 일시정지 버튼
 		Image changedImage = originImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
 		ImageIcon icon_new = new ImageIcon(changedImage);
