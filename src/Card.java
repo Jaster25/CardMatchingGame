@@ -233,7 +233,7 @@ public class Card extends JButton {
 
 				GameStartUI.run = true;
 			}
-		}, 1000);
+		}, 500);
 	}
 
 	// 카드 뒤집기 - 위에 카드 잠깐 보여주기에서 쓸 함수
