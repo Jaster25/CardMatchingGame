@@ -33,11 +33,11 @@ public class Utility {
 		return icon_new;
 	}
 
-	// 버튼의 이미지 바꾸는 메소드
-	static ImageIcon changeButtonImage(String fileName) {
+	// 배경, 타이틀 배너 등 디자인 메소드
+	static ImageIcon designImage(String fileName) {
 		ImageIcon icon = new ImageIcon("./images/" + fileName);
 		Image originImage = icon.getImage();
-
+		
 		// 타이틀 배너
 		if (fileName.equals("Title.jpg")) {
 			Image changedImage = originImage.getScaledInstance(500, 100, Image.SCALE_SMOOTH);
@@ -45,6 +45,16 @@ public class Utility {
 			ImageIcon icon_new = new ImageIcon(changedImage);
 			return icon_new;
 		}
+		Image changedImage = originImage.getScaledInstance(500, 100, Image.SCALE_SMOOTH);
+
+		ImageIcon icon_new = new ImageIcon(changedImage);
+		return icon_new;
+	}
+
+	// 버튼의 이미지 바꾸는 메소드
+	static ImageIcon changeButtonImage(String fileName) {
+		ImageIcon icon = new ImageIcon("./images/" + fileName);
+		Image originImage = icon.getImage();
 
 		// 난이도 선택 버튼
 		if (fileName.equals("easy.jpg") || fileName.equals("normal.jpg") || fileName.equals("hard.jpg")) {

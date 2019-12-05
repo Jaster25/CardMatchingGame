@@ -25,6 +25,7 @@ public class SelectLevelUI extends JPanel {
 
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
 	private Image background;
+	private Image monkey;
 	// 게임 종료 버튼
 	static RoundButton exitButton;
 
@@ -35,11 +36,9 @@ public class SelectLevelUI extends JPanel {
 		// 게임 안내문
 		panelNorth = new JPanel();
 		panelNorth.setPreferredSize(new Dimension(500, 100));
-		//panelNorth.setBackground(Color.WHITE);
-
-		labelMessage = new JLabel(Utility.changeButtonImage("Title.jpg"));
+		labelMessage = new JLabel(Utility.designImage("Title.jpg"));
 		labelMessage.setPreferredSize(new Dimension(500, 100));
-		labelMessage.setHorizontalAlignment(JLabel.CENTER);
+		//labelMessage.setHorizontalAlignment(JLabel.CENTER);
 		
 		panelNorth.add(labelMessage, "NORTH"); 
 		this.add("NORTH", panelNorth);
@@ -64,13 +63,13 @@ public class SelectLevelUI extends JPanel {
 		for (int i = 0; i < 3; ++i)
 			buttons.get(i).addActionListener(new MyActionListener(i));
 
-		// exit버튼
+		// exit버튼, 원숭이 이미지
 		panelSouth = new JPanel();
 		panelSouth.setOpaque(false);
 		panelSouth.setPreferredSize(new Dimension(500, 100));
 		exitButton = new RoundButton(Utility.changeButtonImage("exit.png"));
 		exitButton.setPreferredSize(new Dimension(100, 65));
-
+		
 		panelSouth.add(exitButton, "SOUTH");
 		this.add("SOUTH", panelSouth);
 		exitButton.addActionListener(new ActionListener() {
@@ -83,9 +82,13 @@ public class SelectLevelUI extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-
-		background = new ImageIcon("./images/BGI.png").getImage();
+		Graphics2D g3 = (Graphics2D) g;
+		
+		background = new ImageIcon("./images/BGI.jpg").getImage();
 		g2.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+		
+		monkey=new ImageIcon("./images/monkey1.png").getImage();
+		g3.drawImage(monkey, 400, 100, 100, 100, this);
 	}
 
 	class MyActionListener implements ActionListener {
