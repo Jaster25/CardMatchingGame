@@ -87,7 +87,7 @@ public class SelectLevelUI extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
-		background = new ImageIcon("./images/BGI.jpg").getImage();
+		background = new ImageIcon("./images/BGI.png").getImage();
 		g2.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 	}
 
