@@ -32,7 +32,7 @@ public class ExitUI extends JFrame {
 		GameStartUI.pause();
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
-		exitFrame.setTitle("게임 종료" + GameStartUI.score);
+		exitFrame.setTitle("같은 그림 찾기 게임");
 		exitFrame.setSize(400, 300);
 		exitFrame.setVisible(true);
 		exitFrame.setLocationRelativeTo(null);

@@ -28,7 +28,7 @@ public class CardGame extends JFrame {
 		GameStartUI.reset();
 		GameStartUI.timerStart();
 
-		window.setTitle("카드 짝 맞추기 게임");
+		window.setTitle("같은 그림 찾기 게임");
 		window.panel_1 = new SelectLevelUI(window);
 		window.add(window.panel_1);
 
