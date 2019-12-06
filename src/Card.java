@@ -77,6 +77,7 @@ public class Card extends JButton {
 	}
 
 	public void cardClick() {
+
 		// 정답 처리 안된 경우만 가능
 		if (!correct) {
 			// 앞면인 경우
@@ -106,7 +107,6 @@ public class Card extends JButton {
 		ArrayList<Card> deck = new ArrayList<Card>();
 		ArrayList<Integer> usedCardTypes = new ArrayList<Integer>();
 
-		// 쌍으로
 		for (int i = 1; i <= 4; ++i) {
 
 			int randomType;
@@ -143,7 +143,6 @@ public class Card extends JButton {
 		ArrayList<Card> deck = new ArrayList<Card>();
 		ArrayList<Integer> usedCardTypes = new ArrayList<Integer>();
 
-		// 쌍으로
 		for (int i = 1; i <= 8; ++i) {
 
 			int randomType;
@@ -176,7 +175,6 @@ public class Card extends JButton {
 		ArrayList<Card> deck = new ArrayList<Card>();
 		ArrayList<Integer> usedCardTypes = new ArrayList<Integer>();
 
-		// 쌍으로
 		for (int i = 1; i <= 12; ++i) {
 
 			int randomType;
@@ -236,7 +234,7 @@ public class Card extends JButton {
 		}, 500);
 	}
 
-	// 카드 뒤집기 - 위에 카드 잠깐 보여주기에서 쓸 함수
+	// 카드 뒤집는 메소드
 	public void flip() {
 		// 벽이 아닐 경우
 		if (!isWall) {

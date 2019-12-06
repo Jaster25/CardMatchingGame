@@ -19,13 +19,14 @@ public class SelectLevelUI extends JPanel {
 	static JPanel panelNorth;
 	static JPanel panelCenter;
 	static JPanel panelSouth;
+
 	static JLabel labelMessage;
 
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
 	private Image background;
-	private Image monkey1, monkey2, fire;
+
 	// 게임 종료 버튼
-	static RoundButton exitButton;
+	static CustomButton exitButton;
 
 	// 초기화면 생성자
 	public SelectLevelUI(CardGame window) {
@@ -61,11 +62,11 @@ public class SelectLevelUI extends JPanel {
 		for (int i = 0; i < 3; ++i)
 			buttons.get(i).addActionListener(new MyActionListener(i));
 
-		// exit버튼, 원숭이 이미지
+		// exit버튼
 		panelSouth = new JPanel();
 		panelSouth.setOpaque(false);
 		panelSouth.setPreferredSize(new Dimension(500, 100));
-		exitButton = new RoundButton(Utility.changeButtonImage("tent.png"));
+		exitButton = new CustomButton(Utility.changeButtonImage("tent.png"));
 		exitButton.setPreferredSize(new Dimension(100, 80));
 
 		panelSouth.add(exitButton, "SOUTH");

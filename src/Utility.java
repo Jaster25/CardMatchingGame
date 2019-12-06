@@ -6,7 +6,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-// 유틸리티 메소드용 클래스
 public class Utility {
 
 	// 매개변수에 맞는 효과음 실행
@@ -63,6 +62,7 @@ public class Utility {
 			ImageIcon icon_new = new ImageIcon(changedImage);
 			return icon_new;
 		}
+		
 		// 나가기, 일시정지 버튼
 		Image changedImage = originImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 

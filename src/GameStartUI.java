@@ -26,14 +26,14 @@ public class GameStartUI extends JPanel {
 	static JPanel panelSouth;
 
 	// 포기, 일시정지 버튼
-	static RoundButton giveUpButton;
-	static RoundButton pauseButton;
-	static RoundButton timerButton;
+	static CustomButton giveUpButton;
+	static CustomButton pauseButton;
+	static CustomButton timerButton;
 
 	// 게임 난이도 변수
 	private int level;
 
-	// 정보 관련 : 시도 횟수, 남은 카드 수 , 시간(걸린 시간), 점수
+	// 게임 상태 관련 변수들
 	static JLabel labelMessage;
 	static int tryCount = 0;
 	static int remains;
@@ -41,9 +41,10 @@ public class GameStartUI extends JPanel {
 	static int combo = 0;
 	static int maxTime;
 
+	// 게임에 사용할 그림 카드들
 	static ArrayList<Card> deck;
 
-	// 하단 레이블 메시지 (remains, try, scoreMessage)
+	// 하단 레이블 메시지 (remains, scoreMessage, try)
 	static JLabel remainMessage;
 	static JLabel tryMessage;
 	static JLabel scoreMessage;
@@ -73,7 +74,7 @@ public class GameStartUI extends JPanel {
 		labelMessage.setHorizontalAlignment(JLabel.CENTER);
 
 		// 일시 정지, 재시작 버튼
-		pauseButton = new RoundButton(Utility.changeButtonImage("pause.png"));
+		pauseButton = new CustomButton(Utility.changeButtonImage("pause.png"));
 		pauseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -82,7 +83,7 @@ public class GameStartUI extends JPanel {
 		});
 
 		// 중단버튼 - 메뉴로
-		giveUpButton = new RoundButton(Utility.changeButtonImage("exit.png"));
+		giveUpButton = new CustomButton(Utility.changeButtonImage("exit.png"));
 		giveUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -183,8 +184,9 @@ public class GameStartUI extends JPanel {
 			first.correct = true;
 			second.correct = true;
 
-			// 모든 카드의 짝을 맞출 경우 종료 프레임 띄우기
+			// 모든 카드의 짝을 맞출 경우 종료 창 띄우기
 			if (remains == 0) {
+				pause();
 				ExitUI.clearUI();
 			}
 		} else {
@@ -218,7 +220,7 @@ public class GameStartUI extends JPanel {
 		labelMessageUpdate();
 	}
 
-	// 게임정보 리셋 메소드
+	// 게임 정보 변수들 초기화 메소드
 	public static void reset() {
 
 		run = false;
@@ -276,7 +278,7 @@ public class GameStartUI extends JPanel {
 		gameTimer.schedule(timerTask, 1, 1000);
 	}
 
-	// 상단 + 하단? JLabel 업데이트
+	// 게임 정보 JLabel 업데이트
 	public static void labelMessageUpdate() {
 		remainMessage.setText("Remains Card : " + remains);
 		tryMessage.setText("try : " + tryCount);

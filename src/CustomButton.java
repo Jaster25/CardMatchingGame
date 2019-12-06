@@ -5,30 +5,30 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-public class RoundButton extends JButton {
+public class CustomButton extends JButton {
 
-	public RoundButton(Action a) {
+	public CustomButton(Action a) {
 		super(a);
 		setting();
 	}
 
-	public RoundButton(Icon icon) {
+	public CustomButton(Icon icon) {
 		super(icon);
 		setting();
 	}
 
-	public RoundButton(String text, Icon icon) {
+	public CustomButton(String text, Icon icon) {
 		super(text, icon);
 		setting();
 	}
 
-	public RoundButton(String text) {
+	public CustomButton(String text) {
 		super(text);
 		setting();
 	}
 
 	void setting() {
-		// 적용되는지?
+
 		setSize(50, 50);
 		setBorderPainted(false);
 		setContentAreaFilled(false);
@@ -39,9 +39,7 @@ public class RoundButton extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Utility.soundPlay("buttonClickSound");
-
 			}
 		});
 	}
-
 }
