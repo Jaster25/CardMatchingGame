@@ -1,9 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +23,7 @@ public class SelectLevelUI extends JPanel {
 
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
 	private Image background;
-	private Image monkey;
+	private Image monkey1, monkey2, fire;
 	// 게임 종료 버튼
 	static RoundButton exitButton;
 
@@ -36,11 +34,11 @@ public class SelectLevelUI extends JPanel {
 		// 게임 안내문
 		panelNorth = new JPanel();
 		panelNorth.setPreferredSize(new Dimension(500, 100));
+		panelNorth.setOpaque(false);
 		labelMessage = new JLabel(Utility.designImage("Title.jpg"));
-		labelMessage.setPreferredSize(new Dimension(500, 100));
-		//labelMessage.setHorizontalAlignment(JLabel.CENTER);
-		
-		panelNorth.add(labelMessage, "NORTH"); 
+		labelMessage.setPreferredSize(new Dimension(400, 100));
+
+		panelNorth.add(labelMessage, "NORTH");
 		this.add("NORTH", panelNorth);
 		// 게임 칸
 		panelCenter = new JPanel();
@@ -67,9 +65,9 @@ public class SelectLevelUI extends JPanel {
 		panelSouth = new JPanel();
 		panelSouth.setOpaque(false);
 		panelSouth.setPreferredSize(new Dimension(500, 100));
-		exitButton = new RoundButton(Utility.changeButtonImage("exit.png"));
-		exitButton.setPreferredSize(new Dimension(100, 65));
-		
+		exitButton = new RoundButton(Utility.changeButtonImage("tent.png"));
+		exitButton.setPreferredSize(new Dimension(100, 80));
+
 		panelSouth.add(exitButton, "SOUTH");
 		this.add("SOUTH", panelSouth);
 		exitButton.addActionListener(new ActionListener() {
@@ -82,13 +80,9 @@ public class SelectLevelUI extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		Graphics2D g3 = (Graphics2D) g;
-		
-		background = new ImageIcon("./images/BGI.jpg").getImage();
+
+		background = new ImageIcon("./images/BGI1.png").getImage();
 		g2.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-		
-		monkey=new ImageIcon("./images/monkey1.png").getImage();
-		g3.drawImage(monkey, 400, 100, 100, 100, this);
 	}
 
 	class MyActionListener implements ActionListener {

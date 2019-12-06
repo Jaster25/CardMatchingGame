@@ -37,10 +37,10 @@ public class Utility {
 	static ImageIcon designImage(String fileName) {
 		ImageIcon icon = new ImageIcon("./images/" + fileName);
 		Image originImage = icon.getImage();
-		
+
 		// 타이틀 배너
 		if (fileName.equals("Title.jpg")) {
-			Image changedImage = originImage.getScaledInstance(500, 100, Image.SCALE_SMOOTH);
+			Image changedImage = originImage.getScaledInstance(400, 100, Image.SCALE_SMOOTH);
 
 			ImageIcon icon_new = new ImageIcon(changedImage);
 			return icon_new;

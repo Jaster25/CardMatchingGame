@@ -33,39 +33,41 @@ public class ExitUI extends JFrame {
 		// 종료 안내 프레임 띄우기
 		exitFrame = new JFrame();
 		exitFrame.setTitle("같은 그림 찾기 게임");
-		exitFrame.setSize(400, 300);
+		exitFrame.setSize(400, 190);
 		exitFrame.setVisible(true);
 		exitFrame.setLocationRelativeTo(null);
 		exitFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// 게임 점수와 클리어 시간 안내문
 		panelNorth = new JPanel();
-		panelNorth.setLayout(new GridLayout(1,2));
-		panelNorth.setPreferredSize(new Dimension(400,100));
-		panelNorth.setBackground(Color.WHITE);
-		
-		scoreMessage = new JLabel("Score : "+GameStartUI.score);
-		scoreMessage.setPreferredSize(new Dimension(400, 50));
+		panelNorth.setLayout(new GridLayout(1, 2));
+		panelNorth.setPreferredSize(new Dimension(400, 50));
+		panelNorth.setBackground(Color.DARK_GRAY);
+
+		scoreMessage = new JLabel("Score : " + GameStartUI.score);
+		scoreMessage.setPreferredSize(new Dimension(200, 50));
 		scoreMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		scoreMessage.setHorizontalAlignment(JLabel.CENTER);
-		
-		timeScoreMessage = new JLabel("Time Record : "+GameStartUI.sec);
-		timeScoreMessage.setPreferredSize(new Dimension(400, 50));
+		scoreMessage.setForeground(Color.WHITE);
+
+		timeScoreMessage = new JLabel("Time Record : " + GameStartUI.sec);
+		timeScoreMessage.setPreferredSize(new Dimension(200, 50));
 		timeScoreMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		timeScoreMessage.setHorizontalAlignment(JLabel.CENTER);
-		
+		timeScoreMessage.setForeground(Color.WHITE);
+
 		panelNorth.add(scoreMessage);
 		panelNorth.add(timeScoreMessage);
 		exitFrame.add("North", panelNorth);
-		
+
 		// 게임 종료 안내문
 		panelCenter = new JPanel();
 		panelCenter.setLayout(new GridLayout(1, 1));
-		panelCenter.setPreferredSize(new Dimension(400, 80));
-		panelCenter.setBackground(Color.GRAY);
+		panelCenter.setPreferredSize(new Dimension(400, 90));
+		panelCenter.setBackground(Color.DARK_GRAY);
 
 		exitMessage = new JLabel("난이도를 다시 선택하시겠습니까?");
-		exitMessage.setPreferredSize(new Dimension(400, 80));
+		exitMessage.setPreferredSize(new Dimension(400, 90));
 		exitMessage.setForeground(Color.WHITE);
 		exitMessage.setFont(new Font("Monaco", Font.BOLD, 20));
 		exitMessage.setHorizontalAlignment(JLabel.CENTER);
@@ -74,11 +76,11 @@ public class ExitUI extends JFrame {
 
 		// 선택 버튼
 		panelSouth = new JPanel();
-		panelSouth.setPreferredSize(new Dimension(400, 100));
+		panelSouth.setPreferredSize(new Dimension(400, 50));
 		panelSouth.setLayout(new GridLayout(1, 2));
 
 		yesButton = new RoundButton(Utility.changeButtonImage("yes.png"));
-		yesButton.setPreferredSize(new Dimension(150, 50));
+		yesButton.setPreferredSize(new Dimension(200, 50));
 		yesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -93,7 +95,7 @@ public class ExitUI extends JFrame {
 		});
 
 		noButton = new RoundButton(Utility.changeButtonImage("cancel.png"));
-		noButton.setPreferredSize(new Dimension(150, 50));
+		noButton.setPreferredSize(new Dimension(200, 50));
 		noButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -123,7 +125,7 @@ public class ExitUI extends JFrame {
 		panelNorth = new JPanel();
 		panelNorth.setLayout(new GridLayout(1, 1));
 		panelNorth.setPreferredSize(new Dimension(400, 80));
-		panelNorth.setBackground(Color.GRAY);
+		panelNorth.setBackground(Color.DARK_GRAY);
 
 		exitMessage = new JLabel("메인 메뉴로 가시겠습니까?");
 		exitMessage.setPreferredSize(new Dimension(400, 80));
